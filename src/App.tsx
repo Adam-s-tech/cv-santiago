@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useReducer, useRef } from 'react'
 import { useLocation, Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { Mail, ExternalLink, Briefcase, GraduationCap, Award, Code, Users, Globe, Bot, Zap, Database, Layout, BadgeCheck, FolderGit2, Sparkles, Download, Github, Package, MessageSquare, Receipt, CalendarCheck, FileText, GitBranch, GitFork, Star, Network, Calendar, Percent, UserCheck, Image, TrendingUp, Timer, SkipForward, ThumbsUp, MessageCircle, Share2, ChevronRight, List, ArrowUp, Brain, Target, Inbox, Compass, GitMerge } from 'lucide-react'
 import { translations, seo, type Lang } from './i18n'
 import { useHomeSeo } from './articles/use-article-seo'
@@ -234,6 +234,44 @@ function GridSnakes() {
   return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-[1]" />
 }
 
+
+function useTypewriterRotation(roles: readonly string[], { typeSpeed = 80, deleteSpeed = 60, pauseAfterType = 2000, pauseAfterDelete = 300 } = {}) {
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [displayText, setDisplayText] = useState(roles[0])
+  const [isDeleting, setIsDeleting] = useState(false)
+  const currentRole = roles[roleIndex]
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (!isDeleting && displayText === currentRole) {
+      // Finished typing — pause then start deleting
+      timeout = setTimeout(() => setIsDeleting(true), pauseAfterType)
+    } else if (isDeleting && displayText === '') {
+      // Finished deleting — move to next role and start typing
+      timeout = setTimeout(() => {
+        setRoleIndex(i => (i + 1) % roles.length)
+        setIsDeleting(false)
+      }, pauseAfterDelete)
+    } else if (isDeleting) {
+      // Deleting word by word (ctrl+backspace style)
+      timeout = setTimeout(() => {
+        const words = displayText.trimEnd().split(' ')
+        words.pop()
+        setDisplayText(words.length > 0 ? words.join(' ') + ' ' : '')
+      }, deleteSpeed)
+    } else {
+      // Typing character by character
+      timeout = setTimeout(() => {
+        setDisplayText(currentRole.slice(0, displayText.length + 1))
+      }, typeSpeed)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayText, isDeleting, currentRole, roles, typeSpeed, deleteSpeed, pauseAfterType, pauseAfterDelete])
+
+  return { displayText, roleIndex, isDeleting }
+}
 
 const HOME_TOC_SECTIONS = [
   { id: 'experience', es: 'Experiencia', en: 'Experience' },
@@ -1397,6 +1435,10 @@ function App() {
   const lang: Lang = location.pathname === '/en' ? 'en' : 'es'
   const t = translations[lang]
   const hydrated = useHydrated()
+  const { displayText: rotatingText } = useTypewriterRotation(t.hero.rotate)
+  // prefers-reduced-motion: frase canónica fija, sin rotación ni cursor
+  const reducedMotion = useReducedMotion()
+  const rotating = hydrated && !reducedMotion
   useHeroStyles()
 
 
@@ -1456,7 +1498,14 @@ function App() {
                 {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <Link to={lang === 'es' ? '/sobre-mi' : '/about'} className="text-gradient-theme font-semibold hover:opacity-80 transition-opacity">@santifer</Link>,
               </p>
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 leading-tight text-balance">
-                <span className="text-gradient-theme">{t.hero.line1}</span>
+                {t.hero.lead}
+                <br />
+                {/* Frase rotativa en línea propia y altura fija: cambiar de longitud no recoloca el titular.
+                    Prerender y sin-JS ven la canónica (rotate[0]); el cliente arranca desde ella → sin #418. */}
+                <span className="inline-block min-h-[1.25em] whitespace-nowrap">
+                  <span className="text-gradient-theme">{rotating ? rotatingText : t.hero.rotate[0]}</span>
+                  {rotating && <span className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 rounded-sm translate-y-[2px]" style={{ animation: 'blink 1s step-end infinite' }} />}
+                </span>
                 <br />
                 <span className="inline-block mt-2 whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
               </h1>
