@@ -16,7 +16,7 @@ export const seo = {
 export const translations = {
   es: {
     greeting: 'que lleva IA a producción',
-    hero: { lead: 'Construyo agentes de\u00a0IA que', rotate: ['hacen el trabajo.', 'hablan entre ellos.', 'se auditan entre sí.', 'trabajan de noche.', 'comparten memoria.', 'no se pisan.', 'te avisan al móvil.', 'se pasan el trabajo.', 'preparan tu decisión.'], line2: 'El sí es tuyo.', subPre: 'Creador del ', subCategory: 'agente open-source de búsqueda de empleo con IA', subLink: 'career-ops', subPost: '' },
+    hero: { lead: 'Construyo agentes de\u00a0IA', rotate: ['que hacen el trabajo.', 'que hablan entre ellos.', 'que se auditan entre sí.', 'que trabajan de noche.', 'que comparten memoria.', 'que no se pisan.', 'que te avisan al móvil.', 'que se pasan el trabajo.', 'que preparan tu decisión.'], line2: 'El sí es tuyo.', subPre: 'Creador del ', subCategory: 'agente open-source de búsqueda de empleo con\u00a0IA', subLink: 'career-ops', subPost: '' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'Creador de career-ops'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',

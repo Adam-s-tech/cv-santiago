@@ -1518,7 +1518,7 @@ function App() {
               </p>
               {/* Tres líneas con el MISMO paso vertical: cada una es un bloque con la misma altura de línea
                   (--hl) y sin márgenes propios. La rotativa tiene además altura fija (no baila al vaciarse). */}
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 [--hl:1.18em] leading-[var(--hl)]">
+              <h1 className="font-display text-[1.625rem] min-[420px]:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 [--hl:1.18em] leading-[var(--hl)]">
                 <span className="block text-balance">{t.hero.lead}<TypingDots animate={rotating} /></span>
                 {/* Frase rotativa: BLOQUE de altura fija, no un inline que dependa de tener letras. Entre frase y
                     frase queda vacía ~300 ms; con un inline la línea se encogía y la pill bailaba 14 px.
@@ -1532,7 +1532,7 @@ function App() {
               {/* Subtítulo y pill en una sola línea: la pill ES la palabra "career-ops" de la frase.
                   Enlaza a career-ops.org con rel="me" (ancla de identidad que llevaba el subtítulo);
                   el case study sigue a un clic desde la tarjeta de Experiencia. */}
-              <p className="text-lg text-muted-foreground mb-2 leading-relaxed">
+              <p className="text-lg text-muted-foreground mb-2 leading-relaxed text-balance">
                 {t.hero.subPre}
                 {/* La categoría también enlaza: es el primer enlace a career-ops.org de la frase, así que su
                     texto ("open-source AI job search agent") es el anchor que cuenta (P4 de search-ops). */}
@@ -1542,13 +1542,14 @@ function App() {
                   rel="noopener"
                   className="text-foreground/90 underline decoration-[#20d6ee]/40 underline-offset-4 hover:decoration-[#20d6ee] transition-colors"
                 >
-                  {t.hero.subCategory}
+                  {/* "open-source" nunca se parte por el guion (sin tocar el carácter: el anchor text sigue siendo la keyword exacta) */}
+                  {t.hero.subCategory.split(/(open-source)/).map((part, i) => part === 'open-source' ? <span key={i} className="whitespace-nowrap">{part}</span> : part)}
                 </a>{' '}
                 <a
                   href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona&utm_content=pill"
                   target="_blank"
                   rel="me noopener"
-                  className="relative -top-[3px] inline-flex items-center gap-2 ml-1 my-1 px-3.5 py-1 rounded-full text-sm font-medium align-middle whitespace-nowrap transition-colors duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
+                  className="relative md:-top-[3px] flex w-fit mx-auto mt-3 md:inline-flex md:mx-0 md:ml-1 md:my-1 items-center gap-2 px-3.5 py-1 rounded-full text-sm font-medium align-middle whitespace-nowrap transition-colors duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
                 >
                   <Github className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{t.hero.subLink}</span>
