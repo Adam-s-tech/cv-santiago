@@ -1620,56 +1620,9 @@ function App() {
               <p className="text-sm text-muted-foreground mb-2">{t.experience.careerOps.period}</p>
               <p className="text-muted-foreground whitespace-pre-line mb-6">{t.experience.careerOps.desc}</p>
 
-              {/* As Featured In - Press Logos */}
-              <div className="pt-4 border-t border-border/50 flex flex-wrap items-start gap-x-10 gap-y-6">
-                <div>
-                <p className="text-xs text-muted-foreground/60 uppercase tracking-wider mb-4">{t.experience.careerOps.pressLabel}</p>
-                <div className="flex flex-wrap items-center gap-x-8 gap-y-3 md:gap-x-10 min-h-[28px]">
-                  {t.experience.careerOps.press.map((p) => (
-                    <a
-                      key={p.name}
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      aria-label={`${p.name} — featured article on career-ops`}
-                      className="group inline-flex items-center"
-                    >
-                      <img
-                        src={p.src}
-                        alt={p.name}
-                        width={p.width}
-                        height={p.height}
-                        style={{ height: `${p.height}px` }}
-                        className="press-logo w-auto opacity-55 group-hover:opacity-100 transition-opacity duration-300"
-                        loading="lazy"
-                      />
-                    </a>
-                  ))}
-                </div>
-                </div>
-
-                {/* Member of — programa, no prensa: grupo aparte (mismo criterio que career-ops.org) */}
-                <div className="md:pl-10 md:border-l md:border-border/50">
-                  <p className="text-xs text-muted-foreground/60 uppercase tracking-wider mb-4">{t.experience.careerOps.member.label}</p>
-                  <a
-                    href={t.experience.careerOps.member.url}
-                    target="_blank"
-                    rel="noopener sponsored"
-                    aria-label={t.experience.careerOps.member.aria}
-                    className="group inline-flex items-center min-h-[28px]"
-                  >
-                    {/* press-logo normaliza el color al tema de la web: el SVG oficial lo decide por prefers-color-scheme del SO */}
-                    <img
-                      src={t.experience.careerOps.member.src}
-                      alt={t.experience.careerOps.member.aria}
-                      width={t.experience.careerOps.member.width}
-                      height={t.experience.careerOps.member.height}
-                      style={{ height: `${t.experience.careerOps.member.height}px` }}
-                      className="press-logo w-auto max-w-full opacity-55 group-hover:opacity-100 transition-opacity duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                </div>
+              {/* Prensa + programa: la misma línea única que career-ops.org (PR #122) */}
+              <div className="pt-6 border-t border-border/50">
+                <PressFeatures lang={lang} variant="card" />
               </div>
 
               {/* Deep dive CTA */}
