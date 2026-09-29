@@ -1514,9 +1514,19 @@ function App() {
                   Enlaza a career-ops.org con rel="me" (ancla de identidad que llevaba el subtítulo);
                   el case study sigue a un clic desde la tarjeta de Experiencia. */}
               <p className="text-lg text-muted-foreground mb-2 leading-relaxed">
-                {t.hero.subPre}{' '}
+                {t.hero.subPre}
+                {/* La categoría también enlaza: es el primer enlace a career-ops.org de la frase, así que su
+                    texto ("open-source AI job search agent") es el anchor que cuenta (P4 de search-ops). */}
                 <a
-                  href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona"
+                  href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona&utm_content=category"
+                  target="_blank"
+                  rel="noopener"
+                  className="text-foreground/90 underline decoration-[#20d6ee]/40 underline-offset-4 hover:decoration-[#20d6ee] transition-colors"
+                >
+                  {t.hero.subCategory}
+                </a>{' '}
+                <a
+                  href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona&utm_content=pill"
                   target="_blank"
                   rel="me noopener"
                   className="relative -top-[3px] inline-flex items-center gap-2 ml-1 my-1 px-3.5 py-1 rounded-full text-sm font-medium align-middle whitespace-nowrap transition-colors duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
