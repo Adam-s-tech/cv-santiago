@@ -115,7 +115,7 @@ export default function JacoboAgent({ lang = 'en' }: { lang?: Lang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/jacobo/og-jacobo-agent.webp',
+    image: 'https://santifer.io/jacobo/og-jacobo-agent.jpg',
     publishedTime: '2026-02-25',
     modifiedTime: '2026-09-29',
     articleTags: 'AI agent,multi-agent,n8n,ElevenLabs,HITL,tool calling,WhatsApp,voice AI',

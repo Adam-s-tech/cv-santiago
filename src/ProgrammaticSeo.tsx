@@ -249,7 +249,7 @@ export default function ProgrammaticSeo({ lang = 'en' }: { lang?: Lang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/pseo/og-programmatic-seo.png',
+    image: 'https://santifer.io/pseo/og-programmatic-seo.jpg',
     publishedTime: '2026-02-25',
     modifiedTime: '2026-09-29',
     articleTags: 'programmatic SEO,Airtable,Astro,DataForSEO,crawl budget,phone repair,ERP,local SEO',

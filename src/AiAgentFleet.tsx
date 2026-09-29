@@ -34,7 +34,7 @@ export default function AiAgentFleet({ lang = 'en' }: { lang?: Lang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.webp',
+    image: 'https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.jpg',
     publishedTime: '2026-07-10',
     modifiedTime: '2026-09-29',
     articleTags: 'ai agents,multi-agent,open source,maintainer,Claude Code,sdlc,context engineering',

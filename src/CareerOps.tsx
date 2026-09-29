@@ -69,7 +69,7 @@ export default function CareerOps({ lang = 'en' }: { lang?: Lang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/career-ops/og-career-ops.webp',
+    image: 'https://santifer.io/career-ops/og-career-ops.jpg',
     publishedTime: '2026-03-17',
     modifiedTime: '2026-09-29',
     articleTags: 'multi-agent,job search,Claude Code,ATS,batch processing,HITL,automation',

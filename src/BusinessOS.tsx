@@ -78,7 +78,7 @@ export default function BusinessOS({ lang = 'en' }: { lang?: Lang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/business-os/og-business-os.webp',
+    image: 'https://santifer.io/business-os/og-business-os.jpg',
     publishedTime: '2026-02-25',
     modifiedTime: '2026-09-29',
     articleTags: 'Business OS,Airtable,n8n,ERP,CRM,automation,phone repair',

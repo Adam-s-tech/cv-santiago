@@ -21,6 +21,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 const TEMPLATE = join(__dirname, 'og-template.html')
 const OUT_WEBP = join(ROOT, 'public', 'og-image.webp')
+// JPG para og:image/twitter:image: LinkedIn no previsualiza bien WebP (search-ops, 29-sep). El WebP se
+// sigue generando para que no den 404 los enlaces ya compartidos con la URL antigua.
+const OUT_JPG = join(ROOT, 'public', 'og-image.jpg')
 const STATE = join(__dirname, 'og-image.state.json')
 
 function roundStarsK(n: number): string {
@@ -68,7 +71,7 @@ async function main() {
 
   // Idempotent: skip if the rounded value hasn't changed and the image already exists.
   const prev = readState().starsK
-  if (prev === starsK && existsSync(OUT_WEBP)) {
+  if (prev === starsK && existsSync(OUT_WEBP) && existsSync(OUT_JPG)) {
     console.log(`  ⏭ No change (${starsK}) — og-image.webp is current`)
     return
   }
@@ -111,6 +114,7 @@ async function main() {
     await page.goto('file://' + tmpHtml, { waitUntil: 'networkidle' })
     await page.evaluate(() => (document as any).fonts.ready)
     await page.screenshot({ path: tmpPng, type: 'png' })
+    await page.screenshot({ path: OUT_JPG, type: 'jpeg', quality: 88 })
     await browser.close()
   } catch (err) {
     await browser.close().catch(() => {})

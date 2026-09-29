@@ -194,7 +194,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/jacobo-i18n.ts',
-    ogImage: 'https://santifer.io/jacobo/og-jacobo-agent.webp',
+    ogImage: 'https://santifer.io/jacobo/og-jacobo-agent.jpg',
     heroImage: 'https://santifer.io/jacobo/santiago-headphones-thinking.webp',
     component: () => import('../JacoboAgent.tsx'),
     seoMeta: {
@@ -203,7 +203,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['multi-agent AI', 'multi agent orchestration', 'AI agent', 'sub-agent architecture', 'tool calling production', 'n8n workflows', 'n8n ai agent', 'ai agent case study', 'customer service AI', 'WhatsApp AI agent', 'ElevenLabs voice agent', 'voice AI', 'HITL', 'human in the loop', 'ia para pymes', 'agente ia whatsapp', 'multi-model orchestration', 'OpenRouter', 'FDE portfolio', 'solutions architect AI', 'AI production manager', 'enterprise AI patterns', 'voice AI platform', 'conversational AI case study', 'agentic workflows'],
       articleType: 'TechArticle',
       articleTags: 'AI agent,multi-agent,n8n,ElevenLabs,HITL,tool calling,WhatsApp,voice AI',
-      images: ['https://santifer.io/jacobo/og-jacobo-agent.webp'],
+      images: ['https://santifer.io/jacobo/og-jacobo-agent.jpg'],
       about: [
         { '@type': 'SoftwareApplication', name: 'n8n', sameAs: 'https://www.wikidata.org/wiki/Q130305687', url: 'https://n8n.io', applicationCategory: 'Workflow Automation' },
         { '@type': 'SoftwareApplication', name: 'ElevenLabs', sameAs: 'https://www.wikidata.org/wiki/Q116798355', url: 'https://elevenlabs.io', applicationCategory: 'Voice AI' },
@@ -275,7 +275,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/business-os-i18n.ts',
-    ogImage: 'https://santifer.io/business-os/og-business-os.webp',
+    ogImage: 'https://santifer.io/business-os/og-business-os.jpg',
     heroImage: 'https://santifer.io/business-os/web-landing-hero.webp',
     component: () => import('../BusinessOS.tsx'),
     seoMeta: {
@@ -284,7 +284,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['Business OS', 'Airtable ERP', 'Airtable as ERP', 'no-code ERP', 'Airtable automation', 'CRM gamification', 'phone repair', 'inventory management', 'custom ERP case study', 'repair shop management', 'programmatic SEO', 'Airtable CRM', 'single source of truth', 'business operating system', 'multi-base architecture'],
       articleType: 'TechArticle',
       articleTags: 'Business OS,Airtable,n8n,ERP,CRM,automation,phone repair',
-      images: ['https://santifer.io/business-os/og-business-os.webp'],
+      images: ['https://santifer.io/business-os/og-business-os.jpg'],
       about: [
         { '@type': 'SoftwareApplication', name: 'Airtable', sameAs: 'https://www.wikidata.org/wiki/Q23016614', url: 'https://airtable.com', applicationCategory: 'Database Platform' },
         { '@type': 'SoftwareApplication', name: 'n8n', sameAs: 'https://www.wikidata.org/wiki/Q130305687', url: 'https://n8n.io', applicationCategory: 'Workflow Automation' },
@@ -370,7 +370,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/pseo-i18n.ts',
-    ogImage: 'https://santifer.io/pseo/og-programmatic-seo.webp',
+    ogImage: 'https://santifer.io/pseo/og-programmatic-seo.jpg',
     heroImage: 'https://santifer.io/pseo/ss-repair-page-hero.webp',
     component: () => import('../ProgrammaticSeo.tsx'),
     seoMeta: {
@@ -379,7 +379,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['programmatic SEO', 'Airtable', 'headless CMS', 'Astro', 'DataForSEO', 'crawl budget', 'phone repair', 'static site generation', 'local SEO', 'ERP'],
       articleType: 'TechArticle',
       articleTags: 'programmatic SEO,Airtable,Astro,DataForSEO,crawl budget,phone repair,ERP,local SEO',
-      images: ['https://santifer.io/pseo/og-programmatic-seo.png'],
+      images: ['https://santifer.io/pseo/og-programmatic-seo.jpg'],
       about: [
         { '@type': 'SoftwareApplication', name: 'Airtable', sameAs: 'https://www.wikidata.org/wiki/Q23016614', url: 'https://airtable.com', applicationCategory: 'Database Platform' },
         { '@type': 'SoftwareApplication', name: 'Astro', url: 'https://astro.build', applicationCategory: 'Static Site Generator' },
@@ -449,7 +449,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/chatbot-i18n.ts',
-    ogImage: 'https://santifer.io/chatbot/og-self-healing-chatbot.webp',
+    ogImage: 'https://santifer.io/chatbot/og-self-healing-chatbot.jpg',
     heroImage: 'https://santifer.io/chatbot/hero-self-healing-chatbot.webp',
     component: () => import('../SelfHealingChatbot.tsx'),
     seoMeta: {
@@ -458,7 +458,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['LLMOps', 'self-healing chatbot', 'agentic RAG', 'jailbreak defense', 'prompt injection', 'LLM evaluation', 'closed loop LLM', 'Langfuse', 'prompt versioning', 'adversarial testing', 'trace-to-eval', 'hybrid search pgvector', 'AI portfolio', 'chatbot evals', 'CI gate LLM', 'voice mode chatbot', 'OpenAI Realtime API', 'speech-to-speech AI', 'agentic observability', 'developer feedback loop', 'AI maintaining AI'],
       articleType: 'TechArticle',
       articleTags: 'LLMOps,self-healing chatbot,agentic RAG,jailbreak defense,Langfuse,evals,closed-loop,prompt injection',
-      images: ['https://santifer.io/chatbot/og-self-healing-chatbot.webp'],
+      images: ['https://santifer.io/chatbot/og-self-healing-chatbot.jpg'],
       about: [
         { '@type': 'SoftwareApplication', name: 'Langfuse', url: 'https://langfuse.com', applicationCategory: 'LLM Observability' },
         { '@type': 'SoftwareApplication', name: 'Supabase', url: 'https://supabase.com', applicationCategory: 'Database' },
@@ -527,7 +527,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/career-ops-i18n.ts',
-    ogImage: 'https://santifer.io/career-ops/og-career-ops.webp',
+    ogImage: 'https://santifer.io/career-ops/og-career-ops.jpg',
     heroImage: 'https://santifer.io/career-ops/hero-career-ops.webp',
     component: () => import('../CareerOps.tsx'),
     seoMeta: {
@@ -536,7 +536,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['ai job search', 'ai job search tool', 'ai powered job search', 'ai resume builder', 'ai resume', 'multi agent system', 'multi agent orchestration', 'automated job application', 'ATS-optimized resume', 'Claude Code', 'batch processing', 'HITL', 'job search automation', 'career-ops', 'ai auto apply', 'agente ia', 'crear cv con ia', 'automatizacion con ia', 'sistema multiagente', 'busqueda de empleo ia'],
       articleType: 'TechArticle',
       articleTags: 'multi-agent,job search,Claude Code,ATS,batch processing,HITL,automation,Playwright',
-      images: ['https://santifer.io/career-ops/og-career-ops.webp'],
+      images: ['https://santifer.io/career-ops/og-career-ops.jpg'],
       about: [
         { '@type': 'SoftwareApplication', name: 'Claude Code', url: 'https://claude.ai', applicationCategory: 'AI Agent' },
         { '@type': 'SoftwareApplication', name: 'Playwright', url: 'https://playwright.dev', applicationCategory: 'Browser Automation' },
@@ -635,7 +635,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/ai-agent-fleet-i18n.ts',
-    ogImage: 'https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.webp',
+    ogImage: 'https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.jpg',
     heroImage: 'https://santifer.io/ai-agent-fleet/hero-ai-agent-fleet.webp',
     component: () => import('../AiAgentFleet.tsx'),
     seoMeta: {
@@ -644,7 +644,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['agentic maintenance', 'ai agent fleet', 'maintain open source with ai agents', 'multi-agent code review', 'ai-native sdlc', 'context engineering', 'claude code agents', 'open source maintainer', 'ai agents software maintenance', 'multi-agent orchestration', 'orchestrator agent pattern', 'ephemeral verifier', 'flota de agentes ia', 'mantener open source con agentes ia', 'agentes claude code'],
       articleType: 'TechArticle',
       articleTags: 'ai agents,multi-agent,open source,maintainer,Claude Code,sdlc,context engineering',
-      images: ['https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.webp'],
+      images: ['https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.jpg'],
       about: [
         { '@type': 'DefinedTerm', name: 'agentic maintenance', description: 'Gated, evidence-based upkeep of a living codebase, sustained by a fleet of AI agents under human direction.', url: 'https://santifer.io/ai-agent-fleet#core-concepts' },
         { '@type': 'SoftwareApplication', name: 'career-ops', sameAs: 'https://www.wikidata.org/wiki/Q139007988', url: 'https://github.com/career-ops-hq/career-ops' },
@@ -703,7 +703,7 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'case-study',
     ragReady: true,
     i18nFile: 'src/story-i18n.ts',
-    ogImage: 'https://santifer.io/story/og-story.webp',
+    ogImage: 'https://santifer.io/story/og-story.jpg',
     component: () => import('../Story.tsx'),
     xDefaultSlug: 'historia',
     seoMeta: {
@@ -712,7 +712,7 @@ export const articleRegistry: ArticleConfig[] = [
       keywords: ['santiago open source job hunt', 'career ops by santiago', 'santiago fernandez career ops', 'career-ops story', 'ai job search story', 'operated pipeline job search', 'building in public', 'open source job search', 'hired without applying', 'the reversal', 'historia career-ops', 'busqueda de empleo como pipeline'],
       articleType: 'Article',
       articleTags: 'career-ops,open source,job search,building in public,origin story',
-      images: ['https://santifer.io/story/og-story.webp'],
+      images: ['https://santifer.io/story/og-story.jpg'],
       about: [
         { '@type': 'Person', name: 'Santiago Fernández de Valderrama Aparicio', sameAs: 'https://www.wikidata.org/wiki/Q138710224', url: 'https://santifer.io/about' },
         { '@type': 'SoftwareSourceCode', name: 'career-ops', sameAs: 'https://www.wikidata.org/wiki/Q139007988', url: 'https://career-ops.org' },
