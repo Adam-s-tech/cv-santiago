@@ -44,8 +44,8 @@ const PROOF_POINTS: ProofPoint[] = [
     terms: ['Life OS'],
   },
   {
-    source: 'i18n.ts → projects → Career Ops',
-    terms: ['Career Ops'],
+    source: 'i18n.ts → projects → career-ops',
+    terms: ['career-ops'],
   },
   {
     source: 'i18n.ts → projects → Claude Pulse',

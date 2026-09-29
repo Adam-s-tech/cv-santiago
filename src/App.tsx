@@ -1625,10 +1625,22 @@ function App() {
                 <PressFeatures lang={lang} variant="card" />
               </div>
 
-              {/* Deep dive CTA */}
-              <Link to={lang === 'en' ? '/career-ops-system' : '/career-ops'} className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200 group/cta">
-                <span className="px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 group-hover/cta:bg-primary/20 group-hover/cta:border-primary/50 transition-all duration-200">{t.experience.careerOps.caseStudyLabel}</span>
-              </Link>
+              {/* Deep dive CTA + manifiesto (search-ops 29-sep: CareerOps en una palabra = el manifiesto;
+                  ninguna superficie enlazaba a él con su nombre) */}
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link to={lang === 'en' ? '/career-ops-system' : '/career-ops'} className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200 group/cta">
+                  <span className="px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 group-hover/cta:bg-primary/20 group-hover/cta:border-primary/50 transition-all duration-200">{t.experience.careerOps.caseStudyLabel}</span>
+                </Link>
+                <a
+                  href={t.experience.careerOps.manifesto.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  {t.experience.careerOps.manifesto.label}
+                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </AnimatedSection>
 
@@ -2155,7 +2167,7 @@ function App() {
             const allProjects = t.projects.items as readonly Project[]
             const contentDigest = allProjects.find(p => p.title === 'Content Digest')!
             const lifeOS = allProjects.find(p => p.title === 'Life OS')!
-            const careerOps = allProjects.find(p => p.title === 'Career Ops')!
+            const careerOps = allProjects.find(p => p.title === 'career-ops')!
             const santiferIo = allProjects.find(p => p.title === 'santifer.io')!
             const selfHealingChatbot = allProjects.find(p => p.title === 'Self-Healing Chatbot')!
             // Tools que dependen de santifer.io
@@ -2238,7 +2250,7 @@ function App() {
                   { from: cardRefs.contentDigest, fromEdge: 'bottom', to: cardRefs.projectOSPredict, toEdge: 'top' },
                 ] : [
                   // Desktop: grafo complejo
-                  // Fila 1: Life OS ↔ Career Ops (horizontal)
+                  // Fila 1: Life OS ↔ career-ops (horizontal)
                   { from: cardRefs.lifeOS, fromEdge: 'right', to: cardRefs.careerOps, toEdge: 'left' },
                   // Fila 1 → Fila 2: diagonales hacia santifer.io + chatbot
                   { from: cardRefs.lifeOS, fromEdge: 'bottom', to: cardRefs.santiferIo, toEdge: 'top' },
@@ -2428,7 +2440,7 @@ function App() {
                   ))}
                 </svg>
 
-                {/* Fila 1: Life OS + Career Ops */}
+                {/* Fila 1: Life OS + career-ops */}
                 <div className="grid md:grid-cols-2 gap-6 mb-6 relative z-10">
                   <AnimatedSection delay={0.1}>
                     <ProjectCard project={lifeOS} cardRef={cardRefs.lifeOS} />
