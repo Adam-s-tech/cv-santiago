@@ -16,7 +16,7 @@ export const seo = {
 export const translations = {
   es: {
     greeting: 'que lleva IA a producción',
-    hero: { lead: 'Construyo agentes de\u00a0IA', rotate: ['que hacen el trabajo.', 'que hablan entre ellos.', 'que se auditan entre sí.', 'que trabajan de noche.', 'que comparten memoria.', 'que no se pisan.', 'que te avisan al móvil.', 'que se pasan el trabajo.', 'que preparan tu decisión.'], line2: 'Tú decides. Siempre.', subPre: 'Creador del ', subCategory: 'agente open-source de búsqueda de empleo con\u00a0IA', subLink: 'career-ops', subPost: '' },
+    hero: { lead: 'Construyo agentes de\u00a0IA', rotate: ['que hacen el trabajo.', 'que hablan entre ellos.', 'que se auditan entre sí.', 'que trabajan de noche.', 'que comparten contexto.', 'que no se pisan.', 'que te avisan al móvil.', 'que se pasan el trabajo.', 'que preparan tu decisión.'], line2: 'Tú decides. Siempre.', subPre: 'Creador del ', subCategory: 'agente open-source de búsqueda de empleo con\u00a0IA', subLink: 'career-ops', subPost: '' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'Creador de career-ops'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',
@@ -876,7 +876,7 @@ export const translations = {
   },
   en: {
     greeting: 'who ships AI at scale',
-    hero: { lead: 'I build AI\u00a0agents that', rotate: ['do the work.', 'talk to each other.', 'audit each other.', 'work while you sleep.', 'share one memory.', 'stay in their lane.', 'ping your phone.', 'hand off the work.', 'prep your decisions.'], line2: 'Your call. Always.', subPre: 'Creator of the ', subCategory: 'open-source AI job search agent', subLink: 'career-ops', subPost: '' },
+    hero: { lead: 'I build AI\u00a0agents that', rotate: ['do the work.', 'talk to each other.', 'audit each other.', 'work while you sleep.', 'share a second brain.', 'stay in their lane.', 'ping your phone.', 'hand off the work.', 'prep your decisions.'], line2: 'Your call. Always.', subPre: 'Creator of the ', subCategory: 'open-source AI job search agent', subLink: 'career-ops', subPost: '' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'career-ops Creator'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',
