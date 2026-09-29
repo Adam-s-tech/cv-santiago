@@ -1510,32 +1510,26 @@ function App() {
                 <span className="inline-block mt-2 whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
               </h1>
 
-              <p className="text-lg text-muted-foreground mb-6">
-                {t.hero.subPre}
+              {/* Subtítulo y pill en una sola línea: la pill ES la palabra "career-ops" de la frase.
+                  Enlaza a career-ops.org con rel="me" (ancla de identidad que llevaba el subtítulo);
+                  el case study sigue a un clic desde la tarjeta de Experiencia. */}
+              <p className="text-lg text-muted-foreground mb-2 leading-relaxed">
+                {t.hero.subPre}{' '}
                 <a
                   href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona"
                   target="_blank"
                   rel="me noopener"
-                  className="font-medium text-foreground hover:text-primary transition-colors"
+                  className="relative -top-[3px] inline-flex items-center gap-2 ml-1 my-1 px-3.5 py-1 rounded-full text-sm font-medium align-middle whitespace-nowrap transition-colors duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
                 >
-                  {t.hero.subLink}
+                  <Github className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>{t.hero.subLink}</span>
+                  <Star className="w-3 h-3 text-yellow-500" aria-hidden="true" />
+                  {/* hero-stats:career-ops:stars */}<span className="font-medium">73.0K</span>
+                  <GitFork className="w-3 h-3" aria-hidden="true" />
+                  {/* hero-stats:career-ops:forks */}<span>13.7K</span>
                 </a>
                 {t.hero.subPost}
               </p>
-
-              <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                <Link
-                  to={lang === 'es' ? '/career-ops' : '/career-ops-system'}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>career-ops</span>
-                  <Star className="w-3 h-3 text-yellow-500" />
-                  {/* hero-stats:career-ops:stars */}<span className="font-medium">73.0K</span>
-                  <GitFork className="w-3 h-3" />
-                  {/* hero-stats:career-ops:forks */}<span>13.7K</span>
-                </Link>
-              </div>
 
             </motion.div>
           </div>

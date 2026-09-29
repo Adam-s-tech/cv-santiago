@@ -16,7 +16,7 @@ export const seo = {
 export const translations = {
   es: {
     greeting: 'que lleva IA a producción',
-    hero: { lead: 'Construyo agentes de\u00a0IA que', rotate: ['hacen el trabajo.', 'prueban cada PR.', 'adaptan tu CV.', 'atacan cada plugin.', 'clasifican cada issue.', 'piden segunda opinión.', 'puntúan ofertas.', 'preparan la decisión.'], line2: 'El sí es tuyo.', subPre: 'Creador de ', subLink: 'career-ops', subPost: ', el agente open-source de búsqueda de empleo con IA.' },
+    hero: { lead: 'Construyo agentes de\u00a0IA que', rotate: ['hacen el trabajo.', 'hablan entre ellos.', 'se auditan entre sí.', 'trabajan de noche.', 'comparten memoria.', 'no se pisan.', 'te avisan al móvil.', 'se pasan el trabajo.', 'preparan tu decisión.'], line2: 'El sí es tuyo.', subPre: 'Creador del agente open-source de búsqueda de empleo con IA', subLink: 'career-ops', subPost: '' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'Creador de career-ops'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',
@@ -876,7 +876,7 @@ export const translations = {
   },
   en: {
     greeting: 'who ships AI at scale',
-    hero: { lead: 'I build AI\u00a0agents that', rotate: ['do the work.', 'test every PR.', 'tailor your CV.', 'try to break plugins.', 'triage every issue.', 'get a second opinion.', 'score job listings.', 'prep the decision.'], line2: 'The yes is yours.', subPre: 'Creator of ', subLink: 'career-ops', subPost: ', the open-source AI job search agent.' },
+    hero: { lead: 'I build AI\u00a0agents that', rotate: ['do the work.', 'talk to each other.', 'audit each other.', 'work while you sleep.', 'share one memory.', 'stay in their lane.', 'ping your phone.', 'hand off the work.', 'prep your decisions.'], line2: 'The yes is yours.', subPre: 'Creator of the open-source AI job search agent', subLink: 'career-ops', subPost: '' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'career-ops Creator'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',
