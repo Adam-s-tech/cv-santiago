@@ -1516,16 +1516,17 @@ function App() {
               <p className="text-lg text-muted-foreground mb-2">
                 {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <Link to={lang === 'es' ? '/sobre-mi' : '/about'} className="text-gradient-theme font-semibold hover:opacity-80 transition-opacity">@santifer</Link>,
               </p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 leading-tight text-balance">
-                {t.hero.lead}<TypingDots animate={rotating} />
-                <br />
-                {/* Frase rotativa en línea propia y altura fija: cambiar de longitud no recoloca el titular.
-                    Prerender y sin-JS ven la canónica (rotate[0]); el cliente arranca desde ella → sin #418. */}
-                <span className="inline-block min-h-[1.25em] whitespace-nowrap">
-                  <span className="text-gradient-theme">{rotating ? rotatingText : t.hero.rotate[0]}</span>
+              {/* Tres líneas con el MISMO paso vertical: cada una es un bloque con la misma altura de línea
+                  (--hl) y sin márgenes propios. La rotativa tiene además altura fija (no baila al vaciarse). */}
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 [--hl:1.18em] leading-[var(--hl)]">
+                <span className="block text-balance">{t.hero.lead}<TypingDots animate={rotating} /></span>
+                {/* Frase rotativa: BLOQUE de altura fija, no un inline que dependa de tener letras. Entre frase y
+                    frase queda vacía ~300 ms; con un inline la línea se encogía y la pill bailaba 14 px.
+                    El \u200b conserva la línea base. Prerender y sin-JS ven rotate[0] → sin #418. */}
+                <span className="block h-[var(--hl)] whitespace-nowrap">
+                  <span className="text-gradient-theme">{(rotating ? rotatingText : t.hero.rotate[0]) || '\u200b'}</span>
                 </span>
-                <br />
-                <span className="inline-block mt-2 whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
+                <span className="block whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
               </h1>
 
               {/* Subtítulo y pill en una sola línea: la pill ES la palabra "career-ops" de la frase.
