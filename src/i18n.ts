@@ -16,6 +16,7 @@ export const seo = {
 export const translations = {
   es: {
     greeting: 'que lleva IA a producción',
+    hero: { line1: 'Construyo agentes de\u00a0IA que hacen el trabajo.', line2: 'El sí es tuyo.', subPre: 'Creador de ', subLink: 'career-ops', subPost: ', el agente open-source de búsqueda de empleo con IA.' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'Creador de career-ops'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',
@@ -875,6 +876,7 @@ export const translations = {
   },
   en: {
     greeting: 'who ships AI at scale',
+    hero: { line1: 'I build AI\u00a0agents that do the work.', line2: 'The yes is yours.', subPre: 'Creator of ', subLink: 'career-ops', subPost: ', the open-source AI job search agent.' },
     greetingRoles: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Open Source Builder', 'career-ops Creator'],
     pillLabels: ['Builder', 'Applied AI Operator'],
     email: 'hi@santifer.io',

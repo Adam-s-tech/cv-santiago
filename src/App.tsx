@@ -235,44 +235,6 @@ function GridSnakes() {
 }
 
 
-function useTypewriterRotation(roles: readonly string[], { typeSpeed = 80, deleteSpeed = 60, pauseAfterType = 2000, pauseAfterDelete = 300 } = {}) {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [displayText, setDisplayText] = useState(roles[0])
-  const [isDeleting, setIsDeleting] = useState(false)
-  const currentRole = roles[roleIndex]
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>
-
-    if (!isDeleting && displayText === currentRole) {
-      // Finished typing — pause then start deleting
-      timeout = setTimeout(() => setIsDeleting(true), pauseAfterType)
-    } else if (isDeleting && displayText === '') {
-      // Finished deleting — move to next role and start typing
-      timeout = setTimeout(() => {
-        setRoleIndex(i => (i + 1) % roles.length)
-        setIsDeleting(false)
-      }, pauseAfterDelete)
-    } else if (isDeleting) {
-      // Deleting word by word (ctrl+backspace style)
-      timeout = setTimeout(() => {
-        const words = displayText.trimEnd().split(' ')
-        words.pop()
-        setDisplayText(words.length > 0 ? words.join(' ') + ' ' : '')
-      }, deleteSpeed)
-    } else {
-      // Typing character by character
-      timeout = setTimeout(() => {
-        setDisplayText(currentRole.slice(0, displayText.length + 1))
-      }, typeSpeed)
-    }
-
-    return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, currentRole, roles, typeSpeed, deleteSpeed, pauseAfterType, pauseAfterDelete])
-
-  return { displayText, roleIndex, isDeleting }
-}
-
 const HOME_TOC_SECTIONS = [
   { id: 'experience', es: 'Experiencia', en: 'Experience' },
   { id: 'projects', es: 'Proyectos', en: 'Projects' },
@@ -1436,7 +1398,6 @@ function App() {
   const t = translations[lang]
   const hydrated = useHydrated()
   useHeroStyles()
-  const { displayText: roleText, roleIndex } = useTypewriterRotation(t.greetingRoles)
 
 
   // SEO: Dynamic meta tags based on language
@@ -1483,14 +1444,6 @@ function App() {
                   </div>
                 </div>
               </div>
-              <motion.div
-                initial={hydrated ? { scale: 0 } : false}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-theme flex items-center justify-center shadow-lg border-2 border-background"
-              >
-                <BadgeCheck className="w-6 h-6 text-white" />
-              </motion.div>
             </motion.div>
 
             <motion.div
@@ -1502,46 +1455,29 @@ function App() {
               <p className="text-lg text-muted-foreground mb-2">
                 {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <Link to={lang === 'es' ? '/sobre-mi' : '/about'} className="text-gradient-theme font-semibold hover:opacity-80 transition-opacity">@santifer</Link>,
               </p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-tight">
-                <span className="text-gradient-theme">{hydrated ? roleText : t.greetingRoles[0]}</span>
-                {hydrated && roleIndex === 3 && roleText.includes('career-ops') && (
-                  <a
-                    href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona"
-                    target="_blank"
-                    rel="me noopener noreferrer"
-                    aria-label="career-ops official site"
-                    className="inline-flex items-center ml-2 text-primary hover:opacity-80 transition-opacity align-middle"
-                  >
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                  </a>
-                )}
-                {hydrated && <span className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 rounded-sm translate-y-[2px]" style={{ animation: 'blink 1s step-end infinite' }} />}
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 leading-tight text-balance">
+                <span className="text-gradient-theme">{t.hero.line1}</span>
                 <br />
-                {t.greeting}
-                <br />
-                {lang === 'es' ? 'con ' : 'with '}<BeamPill>Evals <span className="opacity-60">+</span> LLMOps <span className="opacity-60">+</span> HITL</BeamPill>
+                <span className="inline-block mt-2 whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
               </h1>
 
+              <p className="text-lg text-muted-foreground mb-6">
+                {t.hero.subPre}
+                <a
+                  href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona"
+                  target="_blank"
+                  rel="me noopener"
+                  className="font-medium text-foreground hover:text-primary transition-colors"
+                >
+                  {t.hero.subLink}
+                </a>
+                {t.hero.subPost}
+              </p>
+
               <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                {t.pillLabels.map((label, i) => (
-                  <span
-                    key={label}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 backdrop-blur-sm ${
-                      hydrated && i === roleIndex
-                        ? 'border border-[#20d6ee] bg-[#20d6ee]/15 text-foreground scale-105'
-                        : 'border border-[#20d6ee]/30 bg-background/80 text-muted-foreground'
-                    }`}
-                  >
-                    {label}
-                  </span>
-                ))}
                 <Link
                   to={lang === 'es' ? '/career-ops' : '/career-ops-system'}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 backdrop-blur-sm ${
-                    hydrated && (roleIndex === 2 || roleIndex === 3)
-                      ? 'border border-[#20d6ee] bg-[#20d6ee]/15 text-foreground scale-105'
-                      : 'border border-[#20d6ee]/30 bg-background/80 text-muted-foreground'
-                  }`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 backdrop-blur-sm border border-[#20d6ee]/60 bg-[#20d6ee]/10 text-foreground hover:bg-[#20d6ee]/20"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>career-ops</span>
