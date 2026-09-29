@@ -81,6 +81,24 @@ function BeamPill({ children }: { children: React.ReactNode }) {
   )
 }
 
+/** Indicador de "escribiendo…" tras "that": los agentes escriben y su mensaje es la línea siguiente.
+ *  Cada punto lleva un tono del degradado de esa línea (cian → violeta). Sin animar en prerender,
+ *  antes de hidratar y con prefers-reduced-motion: ahí se lee como unos puntos suspensivos quietos. */
+function TypingDots({ animate }: { animate: boolean }) {
+  const tones = ['hsl(var(--gradient-from))', 'color-mix(in oklab, hsl(var(--gradient-from)), hsl(var(--gradient-to)))', 'hsl(var(--gradient-to))']
+  return (
+    <span aria-hidden="true" className="inline-flex items-end gap-[0.14em] ml-[0.22em] mr-[0.1em]">
+      {tones.map((bg, i) => (
+        <span
+          key={i}
+          className="inline-block w-[0.14em] h-[0.14em] rounded-full"
+          style={{ background: bg, ...(animate ? { animation: `typing-dot 1.3s ease-in-out ${i * 0.16}s infinite` } : { opacity: 0.7 }) }}
+        />
+      ))}
+    </span>
+  )
+}
+
 // Inject animation styles once (avoids hydration mismatch from inline <style> in h1)
 const HERO_STYLES_ID = 'hero-beam-styles'
 function useHeroStyles() {
@@ -90,6 +108,7 @@ function useHeroStyles() {
     style.id = HERO_STYLES_ID
     style.textContent = `
       @keyframes blink { 0%, 100% { opacity: 1 } 50% { opacity: 0 } }
+      @keyframes typing-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .45 } 30% { transform: translateY(-.2em); opacity: 1 } }
       @keyframes heal-float {
         0% { opacity: 0; transform: translateY(0) scale(0.6); }
         12% { opacity: 0.25; }
@@ -1498,13 +1517,12 @@ function App() {
                 {lang === 'es' ? 'Hola, soy' : "Hi, I'm"} <Link to={lang === 'es' ? '/sobre-mi' : '/about'} className="text-gradient-theme font-semibold hover:opacity-80 transition-opacity">@santifer</Link>,
               </p>
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 leading-tight text-balance">
-                {t.hero.lead}
+                {t.hero.lead}<TypingDots animate={rotating} />
                 <br />
                 {/* Frase rotativa en línea propia y altura fija: cambiar de longitud no recoloca el titular.
                     Prerender y sin-JS ven la canónica (rotate[0]); el cliente arranca desde ella → sin #418. */}
                 <span className="inline-block min-h-[1.25em] whitespace-nowrap">
                   <span className="text-gradient-theme">{rotating ? rotatingText : t.hero.rotate[0]}</span>
-                  {rotating && <span className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 rounded-sm translate-y-[2px]" style={{ animation: 'blink 1s step-end infinite' }} />}
                 </span>
                 <br />
                 <span className="inline-block mt-2 whitespace-nowrap"><BeamPill>{t.hero.line2}</BeamPill></span>
