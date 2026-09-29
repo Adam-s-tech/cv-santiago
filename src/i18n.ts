@@ -3,13 +3,13 @@ export const seo = {
     title:
       'santifer | Applied AI Operator · Builder of career-ops',
     description:
-      'Multi-agent systems builder. Applied AI Operator con 2 case studies en producción. Creador de career-ops (73.0K+ ⭐). 16 años llevando IA a producción.',
+      'Multi-agent systems builder. Applied AI Operator con 2 case studies en producción. Creador de career-ops (73.1K+ ⭐). 16 años llevando IA a producción.',
   },
   en: {
     title:
       'santifer | Applied AI Operator · Builder of career-ops',
     description:
-      'Multi-agent systems builder. Applied AI Operator with 2 production case studies live. Creator of career-ops (73.0K+ ⭐). 16 years shipping AI at scale.',
+      'Multi-agent systems builder. Applied AI Operator with 2 production case studies live. Creator of career-ops (73.1K+ ⭐). 16 years shipping AI at scale.',
   },
 };
 
@@ -192,7 +192,7 @@ export const translations = {
           link: 'career-ops.org',
           linkLabel: 'career-ops, el agente open-source de búsqueda de empleo con IA',
           linkUrl: 'https://career-ops.org?utm_source=santifer.io&utm_medium=projects-grid&utm_campaign=home',
-          stars: '73.0K',
+          stars: '73.1K',
           forks: '13.7K',
           caseStudyUrl: '/career-ops',
           caseStudyLabel: 'Leer: AI Job Search multi-agente',
@@ -1052,7 +1052,7 @@ export const translations = {
           link: 'career-ops.org',
           linkLabel: 'career-ops, the open-source AI job search agent',
           linkUrl: 'https://career-ops.org?utm_source=santifer.io&utm_medium=projects-grid&utm_campaign=home',
-          stars: '73.0K',
+          stars: '73.1K',
           forks: '13.7K',
           caseStudyUrl: '/career-ops-system',
           caseStudyLabel: 'Case Study: AI Job Search',

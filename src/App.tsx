@@ -1542,8 +1542,10 @@ function App() {
                   rel="noopener"
                   className="text-foreground/90 underline decoration-[#20d6ee]/40 underline-offset-4 hover:decoration-[#20d6ee] transition-colors"
                 >
-                  {/* "open-source" nunca se parte por el guion (sin tocar el carácter: el anchor text sigue siendo la keyword exacta) */}
-                  {t.hero.subCategory.split(/(open-source)/).map((part, i) => part === 'open-source' ? <span key={i} className="whitespace-nowrap">{part}</span> : part)}
+                  {/* "open-source" nunca se parte por el guion (sin tocar el carácter: el anchor text sigue siendo la keyword exacta).
+                      filter(Boolean): en EN la frase EMPIEZA por "open-source" y split deja un "" inicial; ese nodo de
+                      texto vacío lo pintan distinto servidor y cliente → React #418 (cazado en la comprobación de ship-it). */}
+                  {t.hero.subCategory.split(/(open-source)/).filter(Boolean).map((part, i) => part === 'open-source' ? <span key={i} className="whitespace-nowrap">{part}</span> : part)}
                 </a>{' '}
                 <a
                   href="https://career-ops.org?utm_source=santifer.io&utm_medium=hero&utm_campaign=persona&utm_content=pill"
@@ -1554,7 +1556,7 @@ function App() {
                   <Github className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{t.hero.subLink}</span>
                   <Star className="w-3 h-3 text-yellow-500" aria-hidden="true" />
-                  {/* hero-stats:career-ops:stars */}<span className="font-medium">73.0K</span>
+                  {/* hero-stats:career-ops:stars */}<span className="font-medium">73.1K</span>
                   <GitFork className="w-3 h-3" aria-hidden="true" />
                   {/* hero-stats:career-ops:forks */}<span>13.7K</span>
                 </a>

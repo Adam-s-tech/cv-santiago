@@ -548,7 +548,7 @@ export const articleRegistry: ArticleConfig[] = [
         { '@type': 'NewsArticle', name: 'I built a tool to filter 700 listings for my job search. It got me a position as head of AI. — Business Insider', url: 'https://www.businessinsider.com/how-i-built-tool-filter-job-listings-landed-head-ai-2026-4' },
         { '@type': 'NewsArticle', name: 'Mein KI-Tool scannt 700 Job-Anzeigen — so half es mir, Karriere zu machen — Business Insider Deutschland', url: 'https://www.businessinsider.de/karriere/bewerbung/mein-ki-tool-scannt-700-job-anzeigen-so-half-es-mir-karriere-zu-machen/' },
         { '@type': 'NewsArticle', name: 'Το AI εργαλείο που φέρνει επανάσταση στον τρόπο που ψάχνουμε δουλειά — WIRED Greece', url: 'https://wired.com.gr/article/to-ai-ergaleio-pou-fernei-epanastasi-ston-tropo-pou-psachnoume-douleia/' },
-        { '@type': 'WebPage', name: 'Building Career-Ops to Automate the Job Hunt — Create OS Lounge with Santifer', url: 'https://www.youtube.com/watch?v=pDkAe5JbREk' },
+        { '@type': 'WebPage', name: 'Create OS Lounge — Santiago Fernández de Valderrama Aparicio', url: 'https://www.youtube.com/watch?v=pDkAe5JbREk' },
         { '@type': 'WebPage', name: 'Anthropic Claude Code Documentation', url: 'https://docs.anthropic.com/en/docs/claude-code' },
         { '@type': 'WebPage', name: 'Playwright Browser Automation Documentation', url: 'https://playwright.dev/docs/intro' },
         { '@type': 'DiscussionForumPosting', name: 'I built an AI job search system with Claude Code — r/ClaudeAI (2600+ upvotes)', url: 'https://www.reddit.com/r/ClaudeAI/comments/1sd2f37/i_built_an_ai_job_search_system_with_claude_code/' },
@@ -720,7 +720,7 @@ export const articleRegistry: ArticleConfig[] = [
       citation: [
         { '@type': 'NewsArticle', name: 'I built a tool to filter 700 listings for my job search. It got me a position as head of AI. — Business Insider', url: 'https://www.businessinsider.com/how-i-built-tool-filter-job-listings-landed-head-ai-2026-4' },
         { '@type': 'NewsArticle', name: 'Το AI εργαλείο που φέρνει επανάσταση στον τρόπο που ψάχνουμε δουλειά — WIRED Greece', url: 'https://wired.com.gr/article/to-ai-ergaleio-pou-fernei-epanastasi-ston-tropo-pou-psachnoume-douleia/' },
-        { '@type': 'WebPage', name: 'Building Career-Ops to Automate the Job Hunt — Create OS Lounge with Santifer', url: 'https://www.youtube.com/watch?v=pDkAe5JbREk' },
+        { '@type': 'WebPage', name: 'Create OS Lounge — Santiago Fernández de Valderrama Aparicio', url: 'https://www.youtube.com/watch?v=pDkAe5JbREk' },
         { '@type': 'WebPage', name: 'The CareerOps Manifesto', url: 'https://career-ops.org/manifesto' },
       ],
       mentions: [

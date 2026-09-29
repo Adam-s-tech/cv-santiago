@@ -117,7 +117,7 @@ export default function CareerOps({ lang = 'en' }: { lang?: Lang }) {
         <PressFeatures lang={lang} />
       </div>
 
-      <GitHubRepoBadge repo="career-ops-hq/career-ops" stars="73.0K" forks="13.7K" lang={lang} />
+      <GitHubRepoBadge repo="career-ops-hq/career-ops" stars="73.1K" forks="13.7K" lang={lang} />
 
       {/* The career-ops warp chart (Warpchart) — animated SVG served as plain <img>, prerender-safe (no iframe, no hydration guard needed).
           theme=dark FIXED on purpose: site is hardcoded dark; Warpchart's dynamic day/night mode (omitting theme) follows the visitor's OS
