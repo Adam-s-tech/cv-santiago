@@ -335,6 +335,7 @@ export const translations = {
         urlLabel: 'career-ops, el agente open-source de búsqueda de empleo con IA',
         desc: 'Sistema agéntico open-source para automatizar la búsqueda de empleo con IA.',
         pressLabel: 'Mención en prensa',
+        member: { label: 'Miembro de', name: 'Vercel Open Source Program', aria: 'Miembro del Vercel Open Source Program, cohorte Summer 2026', src: '/press-logos/vercel-oss-2026.svg', url: 'https://vercel.com/open-source-program', width: 280, height: 28 },
         press: [
           {
             name: 'WIRED',
@@ -1210,6 +1211,7 @@ export const translations = {
         urlLabel: 'career-ops, the open-source AI job search agent',
         desc: 'Open-source agentic system to automate job hunting with AI.',
         pressLabel: 'As featured in',
+        member: { label: 'Member of', name: 'Vercel Open Source Program', aria: 'Member of the Vercel Open Source Program, Summer 2026 cohort', src: '/press-logos/vercel-oss-2026.svg', url: 'https://vercel.com/open-source-program', width: 280, height: 28 },
         press: [
           {
             name: 'WIRED',
