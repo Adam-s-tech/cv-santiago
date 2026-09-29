@@ -71,7 +71,7 @@ const PERSON = {
   alternateName: ['Santiago Fernández de Valderrama', 'santifer', 'Santi'],
   url: 'https://santifer.io',
   description: "Santiago Fernández de Valderrama is a software engineer specializing in multi-agent AI systems and agentic adoption. He created career-ops, an open-source project maintained by an orchestrated fleet of AI agents, and coined 'agentic maintenance': gated, evidence-based upkeep of a living codebase, sustained by a fleet of AI agents under human direction.",
-  jobTitle: ['AI Forward Deployed Engineer', 'Applied AI Engineer', 'Multi-Agent Systems Engineer', 'Agentic AI Engineer', 'Head of Applied AI', 'Solutions Architect (No/Low-Code & AI)', 'AI Product Manager'],
+  jobTitle: 'Creator of career-ops',
   sameAs: [
     'https://www.linkedin.com/in/santifer',
     'https://github.com/santifer',
@@ -85,7 +85,6 @@ const PERSON = {
     'https://www.crunchbase.com/person/santiago-fernandez-de-valderrama',
     'https://huggingface.co/santifer',
     'https://www.wikidata.org/wiki/Q138710224',
-    'https://santiferirepair.es',
     'https://career-ops.org/about',
     'https://www.facebook.com/santifer.io/',
     'https://www.producthunt.com/@santifer',

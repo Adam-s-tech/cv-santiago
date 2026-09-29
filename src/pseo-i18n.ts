@@ -1015,7 +1015,7 @@ return records.map(r => ({
     },
     footer: {
       role: 'AI Product Manager · Solutions Architect · AI FDE',
-      bio: 'Construyó y vendió un negocio de 16 años en 2025. Ahora aplica el mismo pensamiento de sistemas a AI enterprise.',
+      bio: 'Construyó y vendió un negocio de 16 años en 2025. Ahora construye career-ops a tiempo completo.',
       fellowAt: 'Teaching Fellow en',
       fellowLink: 'AI Product Academy',
       copyright: 'Todos los derechos reservados.',
@@ -2037,7 +2037,7 @@ return records.map(r => ({
     },
     footer: {
       role: 'AI Product Manager · Solutions Architect · AI FDE',
-      bio: 'Built and sold a 16-year business in 2025. Now bringing that same systems thinking to enterprise AI.',
+      bio: 'Built and sold a 16-year business in 2025. Now building career-ops full time.',
       fellowAt: 'Teaching Fellow at',
       fellowLink: 'AI Product Academy',
       copyright: 'All rights reserved.',

@@ -1,6 +1,6 @@
 /* TEAM */
 Builder: Santiago Fernandez de Valderrama Aparicio
-Role: Head of Applied AI · AI Product Manager · Solutions Architect
+Role: Creator & Lead Maintainer of career-ops
 Contact: hi@santifer.io
 Site: https://santifer.io
 Location: Seville, Spain

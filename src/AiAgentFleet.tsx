@@ -36,7 +36,7 @@ export default function AiAgentFleet({ lang = 'en' }: { lang?: Lang }) {
     description: t.seo.description,
     image: 'https://santifer.io/ai-agent-fleet/og-ai-agent-fleet.webp',
     publishedTime: '2026-07-10',
-    modifiedTime: '2026-09-01',
+    modifiedTime: '2026-09-24',
     articleTags: 'ai agents,multi-agent,open source,maintainer,Claude Code,sdlc,context engineering',
     jsonLd: buildJsonLd(lang),
     xDefaultSlug: 'flota-agentes-ia',
@@ -119,8 +119,8 @@ export default function AiAgentFleet({ lang = 'en' }: { lang?: Lang }) {
         <img
           src="/ai-agent-fleet/fig-fleet.svg"
           alt={lang === 'es'
-            ? 'Arquitectura de la flota de agentes IA: un maintainer humano tomando decisiones estratégicas por las tardes y los fines de semana, un agente maintainer orquestador, agentes de Discord, web y dogfood coordinados por IPC de ficheros, verificadores efímeros de solo lectura en git worktrees aislados, y una memoria compuesta que se carga al arrancar.'
-            : 'Architecture of the AI agent fleet: a human maintainer making strategic decisions on evenings and weekends, a maintainer orchestrator agent, Discord, web and dogfood agents coordinated over file-based IPC, read-only ephemeral verifiers in isolated git worktrees, and a compound memory loaded at boot.'}
+            ? 'Arquitectura de la flota de agentes IA: un maintainer humano tomando decisiones estratégicas, un agente maintainer orquestador, agentes de Discord, web y dogfood coordinados por IPC de ficheros, verificadores efímeros de solo lectura en git worktrees aislados, y una memoria compuesta que se carga al arrancar.'
+            : 'Architecture of the AI agent fleet: a human maintainer making strategic decisions, a maintainer orchestrator agent, Discord, web and dogfood agents coordinated over file-based IPC, read-only ephemeral verifiers in isolated git worktrees, and a compound memory loaded at boot.'}
           width={1200}
           height={675}
           loading="lazy"

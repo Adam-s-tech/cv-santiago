@@ -391,7 +391,7 @@ export const businessOsContent = {
     },
     footer: {
       role: 'AI Product Manager · Solutions Architect',
-      bio: 'Construyó y vendió un negocio de 16 años en 2025. Ahora aplica el mismo pensamiento de sistemas a AI enterprise — como FDE, Solutions Architect o AI Production Manager.',
+      bio: 'Construyó y vendió un negocio de 16 años en 2025. Ahora construye career-ops a tiempo completo.',
       fellowAt: 'Teaching Fellow en',
       fellowLink: 'AI Product Academy',
       copyright: 'Todos los derechos reservados.',
@@ -789,7 +789,7 @@ export const businessOsContent = {
     },
     footer: {
       role: 'AI Product Manager · Solutions Architect',
-      bio: 'Built and sold a 16-year business in 2025. Now applying the same systems thinking to enterprise AI — as an FDE, Solutions Architect, or AI Production Manager.',
+      bio: 'Built and sold a 16-year business in 2025. Now building career-ops full time.',
       fellowAt: 'Teaching Fellow at',
       fellowLink: 'AI Product Academy',
       copyright: 'All rights reserved.',

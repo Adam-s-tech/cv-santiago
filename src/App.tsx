@@ -1546,7 +1546,7 @@ function App() {
                   <Github className="w-3.5 h-3.5" />
                   <span>career-ops</span>
                   <Star className="w-3 h-3 text-yellow-500" />
-                  {/* hero-stats:career-ops:stars */}<span className="font-medium">72.6K</span>
+                  {/* hero-stats:career-ops:stars */}<span className="font-medium">73.0K</span>
                   <GitFork className="w-3 h-3" />
                   {/* hero-stats:career-ops:forks */}<span>13.7K</span>
                 </Link>
@@ -2385,11 +2385,11 @@ function App() {
                       </Link>
                     )}
                     {project.link && (
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                         <a
                           href={(project as { linkUrl?: string }).linkUrl ?? `https://${project.link}`}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener"
                           className={`inline-flex items-center gap-2 text-xs ${
                             isTool ? 'text-tool hover:text-tool' : 'text-primary'
                           } hover:underline`}
@@ -2401,8 +2401,8 @@ function App() {
                             </>
                           ) : (
                             <>
-                              <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                              {project.link}
+                              <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
+                              {(project as { linkLabel?: string }).linkLabel ?? project.link}
                             </>
                           )}
                         </a>

@@ -174,14 +174,14 @@ interface ArticleFooterProps {
 
 const FOOTER_I18N = {
   es: {
-    role: 'Head of Applied AI · Builder of career-ops',
-    bio: 'Construyó y vendió un negocio de 16 años en 2025. Creador de career-ops. Ahora aplica el mismo pensamiento de sistemas a AI enterprise.',
+    role: 'Creador y Lead Maintainer de career-ops',
+    bio: 'Construyó y vendió un negocio de 16 años en 2025. Ahora construye career-ops a tiempo completo.',
     fellowAt: 'Teaching Fellow en',
     copyright: 'Todos los derechos reservados.',
   },
   en: {
-    role: 'Head of Applied AI · Builder of career-ops',
-    bio: 'Built and sold a 16-year business in 2025. Creator of career-ops. Now bringing that same systems thinking to enterprise AI.',
+    role: 'Creator & Lead Maintainer of career-ops',
+    bio: 'Built and sold a 16-year business in 2025. Now building career-ops full time.',
     fellowAt: 'Teaching Fellow at',
     copyright: 'All rights reserved.',
   },

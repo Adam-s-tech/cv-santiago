@@ -312,6 +312,12 @@ function validateAssetClaims(): Issue[] {
     }
   }
   try { walkSvg(dist) } catch { return issues }
+  // Assert de que el trabajo se hizo, no solo del resultado: sin SVGs no hay hallazgos,
+  // y un guard que no encuentra nada que mirar es indistinguible de uno que lo miró todo.
+  if (svgs.length === 0) {
+    issues.push({ severity: 'error', msg: 'Guard de atrezzo: 0 SVGs escaneados en dist — el guard no ha comprobado nada', skill: '/seo images' })
+    return issues
+  }
 
   // Claims con verdad externa que caducan. Cada patrón nace de un fallo real.
   const banned: Array<{ re: RegExp; what: string }> = [
@@ -335,6 +341,61 @@ function validateAssetClaims(): Issue[] {
         const rel = file.replace(dist + '/', '')
         issues.push({ severity: 'error', msg: `Claim caducable dentro de un asset: ${rel} → "${hit[0]}" (${what})`, skill: '/seo images' })
       }
+    }
+  }
+  return issues
+}
+
+/**
+ * Guard de grafía de la escala (26-sep-2026). Canon adjudicado por career-ops-maintainer el
+ * 1-sep: la ESCALA del Global se nombra 1-5, sin decimales; un score concreto sí lleva
+ * decimal. El barrido del 1-sep buscó `1.0–5.0` y dejó vivas 11 ocurrencias en español
+ * ("de 1,0 a 5,0", coma decimal y "a") durante 25 días. El patrón cubre punto y coma
+ * decimales y los conectores "a", "to", guion y raya. Escanea lo que se publica: HTML
+ * prerenderizado (texto y JSON-LD) y llms.txt, más el prompt del chatbot, que no pasa por
+ * dist pero responde en vivo a quien pregunta.
+ */
+function validateCanonGrafia(): Issue[] {
+  const issues: Issue[] = []
+  const scaleWithDecimals = /\b1[.,]0\s?(?:a|to|[–-])\s?5[.,]0\b/
+  const targets: string[] = []
+  const walk = (dir: string) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = resolve(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      else if (entry.name.endsWith('.html')) targets.push(full)
+    }
+  }
+  try { walk(dist) } catch { /* dist ausente: el assert de abajo lo convierte en error */ }
+  for (const extra of [resolve(dist, 'llms.txt'), resolve(__dirname, '../chatbot-prompt.txt')]) {
+    if (existsSync(extra)) targets.push(extra)
+  }
+  if (targets.length === 0) {
+    issues.push({ severity: 'error', msg: 'Guard de grafía: 0 ficheros escaneados — el guard no ha comprobado nada', skill: '/seo content' })
+    return issues
+  }
+  // Presente laboral caducado (canon 29-sep-2026): Santiago dejó el puesto de Head of Applied AI
+  // a finales de septiembre y se dedica a career-ops a tiempo completo. Estas frases llevaban
+  // publicadas en 17 ficheros (flota, /story, case study, bios, llms.txt, JSON-LD). Cada patrón
+  // es una frase real que se quitó: si vuelve (un texto viejo reciclado), el build se para.
+  const stalePresent: Array<{ re: RegExp; what: string }> = [
+    { re: /around my full-time job|I hold a full-time job|I still work full-time|parallel to his full-time work/i, what: 'trabajo a jornada completa en presente' },
+    { re: /alrededor de mi trabajo a (?:jornada|tiempo) completo|Sigo trabajando a jornada completa|Mantengo un trabajo a jornada completa/i, what: 'trabajo a jornada completa en presente' },
+    { re: /I am now Head of Applied AI|my current role as Head of Applied AI|role I hold today/i, what: 'Head of Applied AI en presente' },
+    { re: /ahora soy Head of Applied AI|mi rol actual como Head of Applied AI/i, what: 'Head of Applied AI en presente' },
+    { re: /"worksFor"\s*:\s*\{[^}]*Zinkee/, what: 'worksFor declara el empleo anterior como actual' },
+  ]
+  for (const file of targets) {
+    // Fuera payloads base64/data: antes de buscar (falsos positivos masivos en diagramas embebidos)
+    const text = readFileSync(file, 'utf-8').replace(/data:[^"')\s]+/g, '')
+    const rel = file.replace(dist + '/', '').replace(resolve(__dirname, '..') + '/', '')
+    const hit = text.match(scaleWithDecimals)
+    if (hit) {
+      issues.push({ severity: 'error', msg: `Escala del Global con decimales: ${rel} → "${hit[0]}" (canon: la escala se nombra 1-5; un score concreto sí lleva decimal)`, skill: '/seo content' })
+    }
+    for (const { re, what } of stalePresent) {
+      const m = text.match(re)
+      if (m) issues.push({ severity: 'error', msg: `Presente laboral caducado: ${rel} → "${m[0]}" (${what}; canon 29-sep: el puesto va en pasado)`, skill: '/seo content' })
     }
   }
   return issues
@@ -693,7 +754,7 @@ if (structuralIssues.length > 0) {
 }
 
 // Global checks
-const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims()]
+const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims(), ...validateCanonGrafia()]
 if (globalIssues.length > 0) {
   printIssues(globalIssues, 'Global files')
 } else {

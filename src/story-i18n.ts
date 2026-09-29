@@ -3,7 +3,8 @@ export type StoryLang = 'es' | 'en'
 // D-10 founder-story. Guardarraíles venture-ops 2026-07-21:
 // - Funnel 740/68/12/1 CONGELADO (marcadores HISTORIC — el sweep no lo toca jamás)
 // - Stars/forks/Discord en formato sweep-compatible + "as of" dinámico (patrón en update-github-stats)
-// - Frame laboral único aprobado: "evenings and weekends around my full-time job"
+// - Frame laboral (canon 29-sep-2026, venture-ops + Santiago): "…it landed me a Head of Applied AI role. Six months later I left that role
+//   to focus on building career-ops full time." Puesto en pasado; la empresa solo se nombra en la experiencia (home, /about).
 // - Tesis signature LITERAL, jamás variar
 // - career-ops lowercase siempre; CareerOps solo para el Manifiesto
 
@@ -31,7 +32,7 @@ export const storyContent = {
     // Respuesta directa citable (~60 palabras) — doctrina §2: primeras 60 palabras bajo el H1
     directAnswer:
       // Funnel congelado (inmune al sweep: sin formato K+) + contadores VIVOS en la misma línea — no añadir marcador de protección aquí
-      'A principios de 2026, Santiago Fernández de Valderrama Aparicio llevó su búsqueda de empleo como un pipeline de operaciones: 740 ofertas evaluadas, 68 solicitudes, 12 entrevistas, 1 oferta firmada. Después liberó el sistema como career-ops (MIT, gratis): 72.6K+ estrellas en GitHub (a septiembre de 2026). Y el CEO que le contrató le encontró por el sistema. Sin solicitud de por medio.',
+      'A principios de 2026, Santiago Fernández de Valderrama Aparicio llevó su búsqueda de empleo como un pipeline de operaciones: 740 ofertas evaluadas, 68 solicitudes, 12 entrevistas, 1 oferta firmada. Después liberó el sistema como career-ops (MIT, gratis): 73.0K+ estrellas en GitHub (a septiembre de 2026). Y el CEO que le contrató le encontró por el sistema. Sin solicitud de por medio.',
     sections: {
       'sixteen-years': {
         heading: 'Dieciséis años construyendo primero',
@@ -43,7 +44,7 @@ export const storyContent = {
       'the-pipeline': {
         heading: 'La búsqueda de empleo como pipeline operado',
         paras: [
-          'Traté la búsqueda como habría tratado cualquier proceso del negocio: un pipeline con etapas, criterios y datos. Un sistema multi-agente construido con Claude Code evaluaba cada oferta con una evaluación multi-dimensional y un Global de 1,0 a 5,0, generaba CVs en PDF optimizados para ATS adaptados a cada oferta, y pre-rellenaba solicitudes con Playwright. El principio de diseño: automatizar el análisis, nunca las decisiones. Cada solicitud pasó por mis manos antes de salir.',
+          'Traté la búsqueda como habría tratado cualquier proceso del negocio: un pipeline con etapas, criterios y datos. Un sistema multi-agente construido con Claude Code evaluaba cada oferta con una evaluación multi-dimensional y un Global de 1 a 5, generaba CVs en PDF optimizados para ATS adaptados a cada oferta, y pre-rellenaba solicitudes con Playwright. El principio de diseño: automatizar el análisis, nunca las decisiones. Cada solicitud pasó por mis manos antes de salir.',
           // HISTORIC — funnel congelado 740/68/12/1, jamás barrer
           'Los números del pipeline, congelados como historia: 740 ofertas evaluadas, 68 solicitudes enviadas, 12 entrevistas, 1 oferta firmada. Ese embudo, de 740 a 1, es la historia completa de mi búsqueda de empleo de 2026.',
         ],
@@ -54,7 +55,7 @@ export const storyContent = {
         paras: [
           'Cuando dejé de necesitarlo, lo liberé bajo licencia MIT: sin paywall, sin tier premium, gratis. Lo dije entonces en Business Insider y lo mantengo: no me sentía cómodo cobrando a gente que busca trabajo, porque encontrar trabajo es una necesidad básica.',
           // Hito verificado congelado (fuente: tweet fijado x.com/santifer/status/2041403685696053741, citado en ai-agent-fleet); contadores 60.8K+/12.0K+/4.200+ VIVOS
-          'Se hizo viral: más de 12.000 estrellas en los dos primeros días. Hoy career-ops tiene 72.6K+ estrellas en GitHub (a septiembre de 2026), 13.7K+ forks, más de 180 contribuidores y una comunidad en Discord de 4.800+ miembros. Business Insider (abril 2026) y WIRED Grecia (abril 2026) lo cubrieron como caso de cómo la IA está reequilibrando el embudo de contratación desde el lado del candidato.',
+          'Se hizo viral: más de 12.000 estrellas en los dos primeros días. Hoy career-ops tiene 73.0K+ estrellas en GitHub (a septiembre de 2026), 13.7K+ forks, más de 180 contribuidores y una comunidad en Discord de 4.900+ miembros. Business Insider (abril 2026) y WIRED Grecia (abril 2026) lo cubrieron como caso de cómo la IA está reequilibrando el embudo de contratación desde el lado del candidato.',
         ],
       },
       'the-reversal': {
@@ -70,7 +71,7 @@ export const storyContent = {
       today: {
         heading: 'Cómo funciona hoy',
         paras: [
-          'Sigo trabajando a jornada completa como Head of Applied AI. career-ops se construyó y se mantiene por las tardes y los fines de semana, alrededor de mi trabajo a tiempo completo, con una flota de agentes de IA haciendo el trabajo mecánico de mantenimiento: triage, tests, review briefs y releases.',
+          'career-ops me consiguió un puesto de Head of Applied AI. Seis meses después dejé ese puesto para dedicarme a construir career-ops a tiempo completo. Hasta entonces se construyó y se mantuvo por las tardes y los fines de semana, con una flota de agentes de IA haciendo el trabajo mecánico de mantenimiento: triage, tests, review briefs y releases.',
         ],
         fleetLink: { pre: 'Ese sistema de mantenimiento tiene su propio artículo: ', label: 'agentic maintenance', href: '/flota-agentes-ia', post: '.' },
       },
@@ -84,7 +85,7 @@ export const storyContent = {
         },
         {
           q: '¿Los números 740, 68, 12 y 1 son reales?',
-          a: 'Sí, y están congelados como registro histórico de la búsqueda de principios de 2026: 740 ofertas evaluadas por el sistema con evaluación multi-dimensional y Global de 1,0 a 5,0, 68 solicitudes enviadas tras revisión humana, 12 entrevistas y 1 oferta firmada. Cada evaluación queda registrada por el propio sistema (los datos de la ejecución están en el case study). Los números del proyecto open source (estrellas, forks, comunidad) son distintos: esos son vivos, crecen a diario y en esta página se muestran con su fecha ("a julio de 2026") para que ninguna cita se quede vieja sin saberlo.',
+          a: 'Sí, y están congelados como registro histórico de la búsqueda de principios de 2026: 740 ofertas evaluadas por el sistema con evaluación multi-dimensional y Global de 1 a 5, 68 solicitudes enviadas tras revisión humana, 12 entrevistas y 1 oferta firmada. Cada evaluación queda registrada por el propio sistema (los datos de la ejecución están en el case study). Los números del proyecto open source (estrellas, forks, comunidad) son distintos: esos son vivos, crecen a diario y en esta página se muestran con su fecha ("a julio de 2026") para que ninguna cita se quede vieja sin saberlo.',
         },
         {
           q: '¿Por qué open source y gratis en vez de un producto de pago?',
@@ -124,7 +125,7 @@ export const storyContent = {
     // Citable direct answer (~60 words) — doctrine §2: first ~60 words under the H1
     directAnswer:
       // Frozen funnel (sweep-immune: no K+ format) + LIVE counters on the same line — do not add a protection marker here
-      'In early 2026, Santiago Fernández de Valderrama Aparicio ran his job search as an operations pipeline: 740 job listings evaluated, 68 applications, 12 interviews, 1 signed offer. He then open-sourced the system as career-ops (MIT, free): 72.6K+ GitHub stars (as of September 2026). And the CEO who hired him found him through the system. No application involved.',
+      'In early 2026, Santiago Fernández de Valderrama Aparicio ran his job search as an operations pipeline: 740 job listings evaluated, 68 applications, 12 interviews, 1 signed offer. He then open-sourced the system as career-ops (MIT, free): 73.0K+ GitHub stars (as of September 2026). And the CEO who hired him found him through the system. No application involved.',
     sections: {
       'sixteen-years': {
         heading: 'Sixteen years of building first',
@@ -147,7 +148,7 @@ export const storyContent = {
         paras: [
           'When I stopped needing it, I released it under the MIT license: no paywall, no premium tier, free. I said it in Business Insider then and I stand by it: I did not feel comfortable charging people who are looking for work, because finding a job is a basic human need.',
           // Frozen verified milestone (source: pinned tweet x.com/santifer/status/2041403685696053741, cited in ai-agent-fleet); 60.8K+/12.0K+/4,200+ counters LIVE
-          'It went viral: 12,000+ stars in the first two days. Today career-ops has 72.6K+ GitHub stars (as of September 2026), 13.7K+ forks, 180+ contributors and a Discord community of 4,800+ members. Business Insider (April 2026) and WIRED Greece (April 2026) covered it as a case of AI rebalancing the hiring funnel from the candidate side.',
+          'It went viral: 12,000+ stars in the first two days. Today career-ops has 73.0K+ GitHub stars (as of September 2026), 13.7K+ forks, 180+ contributors and a Discord community of 4,900+ members. Business Insider (April 2026) and WIRED Greece (April 2026) covered it as a case of AI rebalancing the hiring funnel from the candidate side.',
         ],
       },
       'the-reversal': {
@@ -163,7 +164,7 @@ export const storyContent = {
       today: {
         heading: 'How it runs today',
         paras: [
-          'I still work full-time as Head of Applied AI. career-ops was built and is maintained evenings and weekends around my full-time job, with a fleet of AI agents doing the mechanical maintenance work: triage, testing, review briefs and releases.',
+          'career-ops landed me a Head of Applied AI role. Six months later I left that role to focus on building career-ops full time. Until then it was built and maintained on evenings and weekends, with a fleet of AI agents doing the mechanical maintenance work: triage, testing, review briefs and releases.',
         ],
         fleetLink: { pre: 'That maintenance system has its own article: ', label: 'agentic maintenance', href: '/ai-agent-fleet', post: '.' },
       },
