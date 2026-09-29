@@ -81,6 +81,12 @@
     color: transparent;
     margin-bottom: 18px;
   }
+  /* Titular = hero de la home (29-sep-2026) en versión fija: una imagen no rota ni anima, así que
+     lleva la frase canónica de la rotación ("do the work.") y career-ops debajo como su prueba. */
+  .head { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 56px; line-height: 1.16; letter-spacing: -0.02em; margin-bottom: 26px; }
+  .head .lead { color: hsl(0 0% 96%); white-space: nowrap; }
+  .head .rot { background-image: linear-gradient(to right, hsl(187 86% 53%), hsl(270 91% 78%)); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; }
+  .sub b { font-weight: 700; color: hsl(0 0% 95%); }
   .sub {
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 32px;
@@ -128,12 +134,11 @@
   </div>
   <div class="content">
     <div class="greeting">Hi, I'm <span class="handle">@santifer</span></div>
-    <h1>Multi-Agent<br/>Systems Engineer</h1>
-    <div class="sub">I build production AI agents.<br/>Open-sourced career-ops, <span class="stars"><svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg><span class="num" data-og-stars-k>__STARS__</span></span></div>
-    <div class="pills">
-      <span class="pill solid">Applied AI · FDE</span>
-      <span class="pill ghost">Founder · exited</span>
+    <div class="head">
+      <div class="lead">I build AI agents that</div>
+      <div class="rot">do the work.</div>
     </div>
+    <div class="sub">Creator of <b>career-ops</b> <span class="stars"><svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg><span class="num" data-og-stars-k>__STARS__</span></span></div>
   </div>
   <div class="domain">santifer.io</div>
 </body>
