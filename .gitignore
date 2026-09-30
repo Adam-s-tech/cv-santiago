@@ -55,3 +55,6 @@ chatbot/.playwright-mcp/
 # RAG
 .rag-hashes.json
 scripts/chunks/
+
+# Playwright MCP snapshots
+.playwright-mcp/
