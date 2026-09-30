@@ -51,8 +51,34 @@ const i18nMap: Record<string, Record<string, { header: { h1: string }; nav: { br
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
+/**
+ * Bloques dentro de <p> en el SSR crudo (30-sep-2026: Callout metía <ul> y <p> en un <p> y 8 páginas
+ * fallaban la hidratación con React #418). Hay que mirarlo aquí: Critters re-parsea el HTML con un
+ * parser estándar que cierra el <p> antes del bloque, así que en dist/ el fallo ya no se ve.
+ */
+const CLOSES_P = new Set(['address', 'article', 'aside', 'blockquote', 'details', 'div', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'menu', 'nav', 'ol', 'p', 'pre', 'section', 'table', 'ul']);
+const invalidNesting: string[] = [];
+let ssrRendersChecked = 0;
+function checkBlockInParagraph(html: string) {
+  ssrRendersChecked++;
+  const body = html.replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, '');
+  let pDepth = 0;
+  for (const m of body.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>/g)) {
+    const tag = m[2].toLowerCase();
+    if (m[1]) { if (tag === 'p' && pDepth > 0) pDepth--; continue; }
+    if (pDepth > 0 && CLOSES_P.has(tag)) {
+      const at = m.index ?? 0;
+      const text = body.slice(Math.max(0, at - 300), at).replace(/^[^<]*>/, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      invalidNesting.push(`<${tag}> dentro de <p>, justo después de: …${text.slice(-120)}`);
+      return;
+    }
+    if (tag === 'p') pDepth++;
+  }
+}
+
 /** Strip React 19 SSR-injected <link> tags from inside #root to prevent hydration mismatch */
 function stripReactSSRTags(html: string): string {
+  checkBlockInParagraph(html);
   return html.replace(/<link[^>]*>/g, '');
 }
 
@@ -433,10 +459,12 @@ function buildArticlePage(
     .replace(/<meta name="twitter:url" content="[^"]*" \/>/, `<meta name="twitter:url" content="${url}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${esc(articleSeo.title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(articleSeo.description)}" />`)
-    // OG image — replace with article-specific image if configured
-    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${esc(config.ogImage || 'https://santifer.io/og-image.webp')}" />`)
+    // OG image — article-specific if configured, else the home card. JPG, never WebP: LinkedIn
+    // doesn't preview WebP reliably. twitter:image always mirrors og:image.
+    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${esc(config.ogImage || 'https://santifer.io/og-image.jpg')}" />`)
     .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${esc(articleSeo.title)}" />`)
-    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, config.ogImage ? `<meta name="twitter:image" content="${esc(config.ogImage)}" />` : '');
+    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${esc(config.ogImage || 'https://santifer.io/og-image.jpg')}" />`)
+    .replace(/<meta name="twitter:image:alt" content="[^"]*" \/>/, `<meta name="twitter:image:alt" content="${esc(articleSeo.title)}" />`);
 
   // Inject article:published_time + article:modified_time + article:tag
   const seoMeta = config.seoMeta;
@@ -718,5 +746,15 @@ for (const { slug, html } of privacyPages) {
   validateHydrationStructure(html, slug);
 }
 
-console.log('[hydration-check] All pages pass structural validation');
+if (ssrRendersChecked === 0) {
+  console.error('[hydration-check] FAIL: 0 renders SSR comprobados — el check de anidamiento no ha mirado nada');
+  process.exit(1);
+}
+if (invalidNesting.length > 0) {
+  for (const issue of invalidNesting) console.error(`[hydration-check] FAIL ${issue}`);
+  console.error('[hydration-check] Un bloque dentro de <p> es HTML inválido: el navegador cierra el <p>, el DOM deja de coincidir y React #418 tira el prerender. Cambia el <p> contenedor por <div>.');
+  process.exit(1);
+}
+
+console.log(`[hydration-check] All pages pass structural validation (${ssrRendersChecked} SSR renders, 0 bloques dentro de <p>)`);
 console.log('[prerender] Done.');

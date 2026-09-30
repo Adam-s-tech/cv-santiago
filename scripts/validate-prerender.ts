@@ -401,6 +401,124 @@ function validateCanonGrafia(): Issue[] {
   return issues
 }
 
+/** Width/height from a JPEG (SOF marker) or PNG (IHDR). null for any other format. */
+function imageDims(buf: Buffer): { format: 'jpeg' | 'png'; width: number; height: number } | null {
+  if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return { format: 'png', width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+  }
+  if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    let i = 2
+    while (i + 9 < buf.length) {
+      if (buf[i] !== 0xff) { i++; continue }
+      const marker = buf[i + 1]
+      if (marker === 0xff) { i++; continue } // fill byte
+      if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+        return { format: 'jpeg', height: buf.readUInt16BE(i + 5), width: buf.readUInt16BE(i + 7) }
+      }
+      i += 2 + buf.readUInt16BE(i + 2)
+    }
+  }
+  return null
+}
+
+/**
+ * Guard de tarjetas de compartir (30-sep-2026). El 29-sep las 8 tarjetas pasaron a JPG porque
+ * LinkedIn no previsualiza bien WebP, y aun así 4 de las 22 URLs del sitemap siguieron
+ * compartiéndose en WebP: /santifer-irepair heredaba el fallback del prerender (og-image.webp,
+ * y sin twitter:image) y el artículo de n8n usaba una captura .webp de 1200×499 que además
+ * contradecía el og:image:width/height declarado. El barrido fue por fichero; el fallo vivía en
+ * un default y en una entrada que nadie miraba. Este guard lee lo que se publica: cada HTML de
+ * dist, sin lista de páginas que pueda quedarse corta.
+ */
+function validateShareCards(): Issue[] {
+  const issues: Issue[] = []
+  const pages: string[] = []
+  const walk = (dir: string) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = resolve(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      // Solo páginas: los .html sueltos (diagramas embebidos en iframe) no se comparten
+      else if (entry.name === 'index.html' || entry.name === '404.html') pages.push(full)
+    }
+  }
+  try { walk(dist) } catch { /* dist ausente: el assert de abajo lo convierte en error */ }
+
+  let checked = 0
+  for (const file of pages) {
+    const html = readFileSync(file, 'utf-8')
+    const rel = file.replace(dist + '/', '')
+    const metaContent = (attr: 'property' | 'name', key: string) =>
+      html.match(new RegExp(`<meta\\s+${attr}="${key}"\\s+content="([^"]*)"`))?.[1] ?? null
+    const og = metaContent('property', 'og:image')
+    if (!og) {
+      issues.push({ severity: 'error', msg: `Tarjeta de compartir ausente: ${rel} no declara og:image`, skill: '/og-image' })
+      continue
+    }
+    checked++
+    const tw = metaContent('name', 'twitter:image')
+    if (tw !== og) {
+      issues.push({ severity: 'error', msg: `twitter:image ${tw ? `(${tw}) distinto de` : 'ausente; debe repetir'} og:image (${og}) en ${rel}`, skill: '/seo page' })
+    }
+    if (!og.startsWith('https://santifer.io/')) {
+      issues.push({ severity: 'error', msg: `og:image fuera del dominio en ${rel}: ${og}`, skill: '/seo images' })
+      continue
+    }
+    const localPath = resolve(dist, decodeURIComponent(og.replace('https://santifer.io/', '').split(/[?#]/)[0]))
+    if (!existsSync(localPath)) {
+      issues.push({ severity: 'error', msg: `og:image apunta a un fichero que no se publica: ${og} (${rel})`, skill: '/og-image' })
+      continue
+    }
+    const dims = imageDims(readFileSync(localPath))
+    if (!dims) {
+      issues.push({ severity: 'error', msg: `og:image en formato que LinkedIn no previsualiza bien (usar JPG): ${og} (${rel})`, skill: '/og-image' })
+      continue
+    }
+    const declaredW = Number(metaContent('property', 'og:image:width') ?? 1200)
+    const declaredH = Number(metaContent('property', 'og:image:height') ?? 630)
+    if (dims.width !== declaredW || dims.height !== declaredH) {
+      issues.push({ severity: 'error', msg: `og:image mide ${dims.width}×${dims.height} pero ${rel} declara ${declaredW}×${declaredH}: ${og}`, skill: '/og-image' })
+    }
+  }
+  // Assert de que el trabajo se hizo: sin páginas con tarjeta, el guard no ha comprobado nada.
+  if (checked === 0) {
+    issues.push({ severity: 'error', msg: 'Guard de tarjetas: 0 páginas con og:image escaneadas en dist — el guard no ha comprobado nada', skill: '/og-image' })
+  }
+  return issues
+}
+
+/**
+ * Guard de hidratación (30-sep-2026). React #418 tiraba el prerender y repintaba desde cero en 8
+ * páginas de producción. Una de las dos causas: validate-articles reescribía dateModified en src/
+ * después de `vite build` y antes del prerender, así que servidor y cliente pintaban fechas
+ * distintas. (La otra, HTML inválido, se comprueba en prerender.tsx sobre el SSR crudo: aquí en
+ * dist/ ya no se ve porque Critters re-parsea el HTML y cierra el <p> por su cuenta.)
+ */
+function validateHydrationSafety(): Issue[] {
+  const issues: Issue[] = []
+
+  // Ninguna fuente puede ser más nueva que el bundle del cliente
+  const assetsDir = resolve(dist, 'assets')
+  const bundles = existsSync(assetsDir) ? readdirSync(assetsDir).filter(f => f.endsWith('.js')) : []
+  if (bundles.length === 0) {
+    issues.push({ severity: 'error', msg: 'Guard de hidratación: 0 bundles JS en dist/assets — el guard no ha comprobado nada', skill: '/seo technical' })
+  } else {
+    const clientBuiltAt = Math.min(...bundles.map(f => statSync(resolve(assetsDir, f)).mtimeMs))
+    const stale: string[] = []
+    const walkSrc = (dir: string) => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const full = resolve(dir, entry.name)
+        if (entry.isDirectory()) walkSrc(full)
+        else if (/\.(tsx?|json|css)$/.test(entry.name) && statSync(full).mtimeMs > clientBuiltAt) stale.push(full.replace(root + '/', ''))
+      }
+    }
+    walkSrc(resolve(root, 'src'))
+    if (stale.length > 0) {
+      issues.push({ severity: 'error', msg: `Fuente modificada después de vite build: ${stale.slice(0, 5).join(', ')}${stale.length > 5 ? '…' : ''}. El prerender la ve y el cliente no → hidratación rota. Todo lo que reescribe src/ va antes de vite build.`, skill: '/seo technical' })
+    }
+  }
+  return issues
+}
+
 function validateGlobalFiles(): Issue[] {
   const issues: Issue[] = []
 
@@ -657,7 +775,8 @@ function validateStructural(): Issue[] {
   // S2. No duplicate ogImage across articles
   const ogImages = new Map<string, string[]>()
   for (const article of articleRegistry) {
-    if (!article.ogImage) continue
+    // Un puente comparte a propósito la tarjeta del artículo al que lleva
+    if (!article.ogImage || article.type === 'bridge') continue
     const labels = ogImages.get(article.ogImage) || []
     labels.push(article.id)
     ogImages.set(article.ogImage, labels)
@@ -754,7 +873,7 @@ if (structuralIssues.length > 0) {
 }
 
 // Global checks
-const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims(), ...validateCanonGrafia()]
+const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims(), ...validateCanonGrafia(), ...validateShareCards(), ...validateHydrationSafety()]
 if (globalIssues.length > 0) {
   printIssues(globalIssues, 'Global files')
 } else {

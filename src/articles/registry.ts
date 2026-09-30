@@ -88,12 +88,12 @@ export const articleRegistry: ArticleConfig[] = [
     type: 'collab',
     ragReady: true,
     i18nFile: 'src/n8n-i18n.ts',
-    ogImage: 'https://santifer.io/workflows/n8n-ai-feedback-classification-workflow.webp',
+    ogImage: 'https://santifer.io/workflows/og-n8n-for-pms.jpg',
     heroImage: 'https://santifer.io/workflows/n8n-sprint-report-automation-workflow.webp',
     component: () => import('../N8nForPMs.tsx'),
     seoMeta: {
       datePublished: '2026-02-24',
-      dateModified: '2026-05-10',
+      dateModified: '2026-09-30',
       keywords: ['n8n', 'n8n tutorial', 'n8n templates', 'n8n AI', 'n8n workflow', 'n8n automation', 'n8n cheat sheet', 'product manager', 'AI workflow automation', 'sprint report automation', 'feedback classification AI', 'no-code automation', 'n8n for product managers', 'workflow templates free'],
       articleType: 'TechArticle',
       articleTags: 'n8n,product manager,automation,AI,workflow,no-code',
@@ -454,7 +454,7 @@ export const articleRegistry: ArticleConfig[] = [
     component: () => import('../SelfHealingChatbot.tsx'),
     seoMeta: {
       datePublished: '2026-03-11',
-      dateModified: '2026-07-21',
+      dateModified: '2026-09-29',
       keywords: ['LLMOps', 'self-healing chatbot', 'agentic RAG', 'jailbreak defense', 'prompt injection', 'LLM evaluation', 'closed loop LLM', 'Langfuse', 'prompt versioning', 'adversarial testing', 'trace-to-eval', 'hybrid search pgvector', 'AI portfolio', 'chatbot evals', 'CI gate LLM', 'voice mode chatbot', 'OpenAI Realtime API', 'speech-to-speech AI', 'agentic observability', 'developer feedback loop', 'AI maintaining AI'],
       articleType: 'TechArticle',
       articleTags: 'LLMOps,self-healing chatbot,agentic RAG,jailbreak defense,Langfuse,evals,closed-loop,prompt injection',
@@ -747,6 +747,9 @@ export const articleRegistry: ArticleConfig[] = [
     },
     sectionLabels: { es: {}, en: {} },
     type: 'bridge',
+    // El puente comparte la tarjeta del case study al que lleva (Business OS). Sin esta línea el
+    // prerender caía al og-image.webp de la home y el componente declaraba otra al hidratar.
+    ogImage: 'https://santifer.io/business-os/og-business-os.jpg',
     component: () => import('../SantiferIRepair.tsx'),
     xDefaultSlug: 'santifer-irepair',
   },

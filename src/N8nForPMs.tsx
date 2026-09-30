@@ -40,9 +40,9 @@ export default function N8nForPMs({ lang = 'en' }: { lang?: N8nLang }) {
     altSlug: t.altSlug,
     title: t.seo.title,
     description: t.seo.description,
-    image: 'https://santifer.io/workflows/n8n-ai-feedback-classification-workflow.webp',
+    image: 'https://santifer.io/workflows/og-n8n-for-pms.jpg',
     publishedTime: '2026-02-24',
-    modifiedTime: '2026-05-10',
+    modifiedTime: '2026-09-30',
     articleTags: 'n8n,product manager,automation,AI,workflow,no-code',
     jsonLd: buildJsonLd(lang),
     xDefaultSlug: 'n8n-para-pms',
@@ -63,7 +63,7 @@ export default function N8nForPMs({ lang = 'en' }: { lang?: N8nLang }) {
           subtitle={t.header.subtitle}
           date={t.header.date}
           dateISO="2026-02-24"
-          dateModifiedISO="2026-05-10"
+          dateModifiedISO="2026-09-30"
           readingTime={t.readingTime}
         />
 

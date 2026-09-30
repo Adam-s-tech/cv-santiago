@@ -10,7 +10,7 @@
  *   npx tsx --tsconfig tsconfig.app.json scripts/validate-articles.ts --fix
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execSync } from 'node:child_process'
@@ -65,9 +65,38 @@ import { articleRegistry } from '../src/articles/registry.ts'
 type Severity = 'error' | 'warn'
 interface Issue { severity: Severity; msg: string }
 
+/**
+ * Commits frontera de un clon superficial (Vercel clona con profundidad limitada). En la frontera
+ * git ve todos los ficheros como recién añadidos, así que `git log -1 -- fichero` devuelve la
+ * fecha de ese commit para cualquier fichero que no se tocó dentro del clon: el 29-sep-2026 el
+ * build de producción declaró n8n-for-pms modificado ese día cuando llevaba intacto desde mayo.
+ */
+const shallowBoundaries: Set<string> = (() => {
+  try {
+    const shallowFile = execSync('git rev-parse --git-path shallow', { cwd: root, encoding: 'utf-8' }).trim()
+    const abs = resolve(root, shallowFile)
+    return existsSync(abs) ? new Set(readFileSync(abs, 'utf-8').split('\n').filter(Boolean)) : new Set()
+  } catch { return new Set() }
+})()
+
+/** Líneas que escribe la propia autocorrección de fechas de este script */
+const DATE_LINE = /\b(?:dateModified|modifiedTime|dateModifiedISO)\b/
+
 function gitLastModified(filePath: string): string | null {
   try {
-    return execSync(`git log --format=%aI -1 -- "${filePath}"`, { cwd: root, encoding: 'utf-8' }).trim() || null
+    const log = execSync(`git log --format="%H %aI" -- "${filePath}"`, { cwd: root, encoding: 'utf-8' }).trim()
+    for (const line of log.split('\n').filter(Boolean)) {
+      const [sha, date] = line.split(' ')
+      // Fecha de frontera = desconocida: mejor no tocar la fecha commiteada que inventar frescura
+      if (shallowBoundaries.has(sha)) return null
+      // Un commit que en este fichero solo cambia líneas de fecha es la autocorrección de un build
+      // anterior, no contenido: si contara, cada commit de fechas subiría la fecha al día siguiente
+      const diff = execSync(`git show --format= --unified=0 ${sha} -- "${filePath}"`, { cwd: root, encoding: 'utf-8' })
+      const changed = diff.split('\n').filter(l => /^[-+]/.test(l) && !/^(?:---|\+\+\+) /.test(l))
+      if (changed.length > 0 && changed.every(l => DATE_LINE.test(l))) continue
+      return date || null
+    }
+    return null
   } catch { return null }
 }
 
@@ -157,6 +186,15 @@ function validateArticle(config: typeof articleRegistry[0]): { issues: Issue[]; 
 
   const seoBlock = extractSeoBlock(source)
   const jsonLdBlock = extractJsonLdBlock(source)
+
+  // 0. La tarjeta que el componente declara al hidratar es la misma que sirve el prerender.
+  // Si divergen, el crawler sin JS (LinkedIn, X, WhatsApp) comparte una y Google indexa otra:
+  // /santifer-irepair lo hizo de marzo a septiembre de 2026 (og-image.webp vs og-business-os).
+  const hydratedImage = seoBlock ? extractString(seoBlock, 'image') : null
+  const prerenderImage = config.ogImage ?? 'https://santifer.io/og-image.jpg'
+  if (hydratedImage && hydratedImage !== prerenderImage) {
+    issues.push({ severity: 'error', msg: `og:image diverge: el prerender sirve ${prerenderImage} (registry.ogImage) y ${sourceRel} declara ${hydratedImage} al hidratar` })
+  }
 
   // Bridge pages don't use buildArticleJsonLd — skip article-specific checks
   if (config.type === 'bridge') {

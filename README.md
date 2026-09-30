@@ -167,12 +167,13 @@ All scripts live in `scripts/` and run via `npm run`:
 ### Build Pipeline
 | Command | Script | Description |
 |---------|--------|-------------|
-| `npm run build` | (chained) | rag:sync → prompt:sync → embed-evals → reddit-stats → tsc → vite → sitemap → validate → prerender |
+| `npm run build` | (chained) | rag:sync → prompt:sync → embed-evals → live stats → og-image → validate-articles → tsc → vite → sitemap → rss → validate-llms-txt → prerender → validate-prerender → indexnow |
 | — | `scripts/embed-evals.ts` | Parse eval reports → embed in dashboard |
 | — | `scripts/generate-sitemap.ts` | Generate sitemap.xml with lastmod |
-| — | `scripts/validate-articles.ts` | SEO validation (dates, keywords, OG images) |
+| — | `scripts/validate-articles.ts` | SEO validation (dates, keywords, OG images). Runs **before** vite: it rewrites `dateModified` in `src/`, and the client bundle and the prerender must see the same value |
 | — | `scripts/validate-llms-txt.ts` | Validate llms.txt consistency |
-| — | `scripts/prerender.tsx` | SSR prerender all pages with critical CSS |
+| — | `scripts/prerender.tsx` | SSR prerender all pages with critical CSS; fails on block elements inside `<p>` (hydration #418) |
+| — | `scripts/validate-prerender.ts` | SEO/GEO invariants on `dist/`: share cards (JPG, real size, `twitter:image`), stale claims, canon, sources newer than the client bundle |
 | — | `scripts/indexnow-ping.ts` | Ping Bing/Yandex on deploy |
 
 ---

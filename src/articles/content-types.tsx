@@ -206,7 +206,9 @@ export function Callout({ children, className, editorId }: CalloutProps) {
   return (
     <EditorLabel name="Callout" id={editorId}>
       <div className={`bg-primary/5 border-l-4 border-primary/40 rounded-r-lg pl-5 pr-4 py-4 mb-6 ${className ?? ''}`}>
-        <p className="text-base text-foreground font-medium leading-relaxed">{children}</p>
+        {/* div, no p: los artículos meten <ul> y <Prose> (otro <p>) dentro; un <p> anidado es HTML
+            inválido, el navegador lo cierra al parsear el prerender y la hidratación falla (#418) */}
+        <div className="text-base text-foreground font-medium leading-relaxed">{children}</div>
       </div>
     </EditorLabel>
   )
