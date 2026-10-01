@@ -11,9 +11,9 @@ export const aboutContent = {
     heading: 'Santiago Fernández de Valderrama',
     manifesto: 'Las empresas usan IA para filtrar candidatos. Yo simplemente le he dado IA a los candidatos para elegir empresas.',
     storyCta: { label: 'Lee la historia completa', desc: 'De 740 ofertas evaluadas a 1 firmada, y the reversal', href: '/historia' },
-    subtitle: 'Applied AI Operator · Founder · Builder of career-ops (73.1K+ ⭐)',
+    subtitle: 'Applied AI Operator · Founder · Creator of career-ops (73.1K+ ⭐)',
     location: 'Sevilla, España',
-    lastUpdated: 'Abril 2026',
+    lastUpdated: 'Septiembre 2026',
     bio: [
       'Emprendedor tecnológico español con 16+ años construyendo productos. Fundó Santifer iRepair en 2009 y lo escaló a más de 30.000 reparaciones con automatización IA logrando un 90% de autoservicio antes de vender el negocio en 2025.',
       'Construye sistemas IA en producción: career-ops (sistema multi-agente de búsqueda de empleo, 73.1K+ stars en GitHub), un chatbot self-healing con 71 evals automatizados y defensa de jailbreak en 6 capas, el agente IA omnicanal Jacobo (n8n + ElevenLabs + tool calling, vendido con el negocio), y un Business OS custom con 12 bases de Airtable y 2.100 campos.',
@@ -82,9 +82,9 @@ export const aboutContent = {
     heading: 'Santiago Fernández de Valderrama',
     manifesto: 'Companies use AI to filter candidates. I just gave candidates AI to choose companies.',
     storyCta: { label: 'Read the full story', desc: 'From 740 listings evaluated to 1 signed, and the reversal', href: '/story' },
-    subtitle: 'Applied AI Operator · Founder · Builder of career-ops (73.1K+ ⭐)',
+    subtitle: 'Applied AI Operator · Founder · Creator of career-ops (73.1K+ ⭐)',
     location: 'Seville, Spain',
-    lastUpdated: 'April 2026',
+    lastUpdated: 'September 2026',
     bio: [
       'Spanish tech entrepreneur with 16+ years building products. Founded Santifer iRepair in 2009, scaling it to 30,000+ repairs with AI-powered automation achieving 90% self-service before selling the business in 2025.',
       'Builds production AI systems: career-ops (multi-agent job search system, 73.1K+ GitHub stars), a Self-Healing Chatbot with 71 automated evals and 6-layer jailbreak defense, the omnichannel AI agent Jacobo (n8n + ElevenLabs + tool calling, sold with the business), and a custom Business OS with 12 Airtable bases and 2,100 fields.',

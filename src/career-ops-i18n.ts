@@ -7,7 +7,7 @@ export const careerOpsContent = {
     readingTime: '18 min de lectura',
     seo: {
       title: 'career-ops: Agente IA que Automatiza Mi Búsqueda de Empleo',
-      description: 'Case study: agente IA multi-agente que evalúa ofertas con scoring multi-dimensional, crea CV con IA personalizados y automatiza aplicaciones.',
+      description: 'Case study: sistema multi-agente con scoring multi-dimensional de ofertas y CV con IA. 740 ofertas evaluadas. Nunca envía candidaturas en tu nombre.',
     },
     nav: {
       breadcrumbHome: 'Inicio',
@@ -344,7 +344,7 @@ export const careerOpsContent = {
     readingTime: '18 min read',
     seo: {
       title: 'career-ops: How I Built My Own AI Job Search Tool',
-      description: 'Case study: AI job search tool built as a multi-agent system. AI resume builder, multi-dimensional scoring, automated applications with HITL.',
+      description: 'Case study: AI job search tool built as a multi-agent system. Multi-dimensional scoring and AI resume builder. Never applies in your name. 740 offers evaluated.',
     },
     nav: {
       breadcrumbHome: 'Home',

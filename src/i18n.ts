@@ -1,13 +1,13 @@
 export const seo = {
   es: {
     title:
-      'santifer | Applied AI Operator · Builder of career-ops',
+      'santifer | Applied AI Operator · Creator of career-ops',
     description:
       'Multi-agent systems builder. Applied AI Operator con 2 case studies en producción. Creador de career-ops (73.1K+ ⭐). 16 años llevando IA a producción.',
   },
   en: {
     title:
-      'santifer | Applied AI Operator · Builder of career-ops',
+      'santifer | Applied AI Operator · Creator of career-ops',
     description:
       'Multi-agent systems builder. Applied AI Operator with 2 production case studies live. Creator of career-ops (73.1K+ ⭐). 16 years shipping AI at scale.',
   },
@@ -35,7 +35,7 @@ export const translations = {
       seeking: [
         'Siento que esto es sólo el principio.',
         'Equipos grandes. Retos difíciles. End-to-end.',
-        'Listo para el siguiente capítulo.',
+        'Ahora construyo career-ops a tiempo completo.',
       ],
       nav: [
         { icon: 'briefcase', label: 'Mi camino', href: '#experience' },
@@ -895,7 +895,7 @@ export const translations = {
       seeking: [
         'This still feels like day one.',
         'Bigger teams. Harder problems. End-to-end.',
-        "Ready for what's next.",
+        'Now building career-ops full time.',
       ],
       nav: [
         { icon: 'briefcase', label: 'My path', href: '#experience' },

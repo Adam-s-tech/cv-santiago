@@ -367,7 +367,9 @@ function validateCanonGrafia(): Issue[] {
     }
   }
   try { walk(dist) } catch { /* dist ausente: el assert de abajo lo convierte en error */ }
-  for (const extra of [resolve(dist, 'llms.txt'), resolve(__dirname, '../chatbot-prompt.txt')]) {
+  // El prompt del modo voz es la otra copia viva del perfil: el 1-oct repetía «Busca roles» aunque
+  // el del chatbot de texto ya se había corregido
+  for (const extra of [resolve(dist, 'llms.txt'), resolve(__dirname, '../chatbot-prompt.txt'), resolve(__dirname, '../api/voice-token.js')]) {
     if (existsSync(extra)) targets.push(extra)
   }
   if (targets.length === 0) {
@@ -385,10 +387,39 @@ function validateCanonGrafia(): Issue[] {
     { re: /ahora soy Head of Applied AI|mi rol actual como Head of Applied AI/i, what: 'Head of Applied AI en presente' },
     { re: /"worksFor"\s*:\s*\{[^}]*Zinkee/, what: 'worksFor declara el empleo anterior como actual' },
   ]
+  // Canon de producto (1-oct-2026, aviso de brand-ops el día del anuncio full time): career-ops
+  // prepara candidaturas y nunca las envía en nombre del candidato. llms.txt decía «automates the
+  // analysis and application phases» y la meta description del case study «automatiza aplicaciones».
+  const autoApplyClaims: Array<{ re: RegExp; what: string }> = [
+    { re: /\bautomat(?:es|ed|ing|e)\s+(?:the\s+)?(?:analysis\s+and\s+)?applications?\b/i, what: 'afirma que career-ops automatiza las candidaturas' },
+    { re: /\bautomatiza\w*\s+(?:el\s+análisis\s+y\s+)?(?:las\s+)?(?:aplicaciones|candidaturas)\b/i, what: 'afirma que career-ops automatiza las candidaturas' },
+    { re: /\bnever applies on the candidate's behalf without confirmation\b/i, what: 'insinúa que envía con confirmación' },
+    // Hechos contrastados con el core por search-ops (1-oct): el repo es JavaScript (.mjs) y Go,
+    // las 5 dimensiones son las de modes/_shared.md, y lo que se puntúa son listings, no offers
+    { re: /\bin TypeScript and Go\b|"name"\s*:\s*"career-ops"[^{}]*"programmingLanguage"\s*:\s*\[[^\]]*"TypeScript"/i, what: 'career-ops no tiene TypeScript (JavaScript y Go)' },
+    { re: /stack alignment, role seniority/i, what: 'dimensiones de scoring que no son las del core' },
+    { re: /\bscor\w*\s+job offers\b/i, what: 'se puntúan job listings; «offer» es solo la oferta final' },
+    // Señales de búsqueda de empleo (1-oct, día del anuncio «full time»): la home, llms.txt, el
+    // FAQPage del schema y los dos prompts del chatbot seguían ofreciéndolo para roles
+    { re: /Ready for what's next|siguiente capítulo|Open to:\**\s*Remote roles|roles busca|roles is Santiago looking|Busca roles senior|Looking for senior remote roles|Available for senior remote roles|disponible para (?:roles )?remoto/i, what: 'señal de búsqueda de empleo; canon: trabaja en career-ops a tiempo completo' },
+    { re: /Builder of career-ops/, what: 'canon del 29-sep: Creator of career-ops' },
+  ]
+  // Decisión del 29-sep-2026: el ex-empleador se nombra como experiencia pasada con fechas SOLO en
+  // la sección de experiencia (home y /about), nunca en prosa. El prompt del chatbot lo cita igual,
+  // como experiencia con fechas. llms.txt lo nombraba en la FAQ «What is career-ops?».
+  const zinkeeAllowed = new Set(['index.html', 'en/index.html', 'about/index.html', 'sobre-mi/index.html', 'chatbot-prompt.txt'])
   for (const file of targets) {
     // Fuera payloads base64/data: antes de buscar (falsos positivos masivos en diagramas embebidos)
     const text = readFileSync(file, 'utf-8').replace(/data:[^"')\s]+/g, '')
     const rel = file.replace(dist + '/', '').replace(resolve(__dirname, '..') + '/', '')
+    for (const { re, what } of autoApplyClaims) {
+      const m = text.match(re)
+      if (m) issues.push({ severity: 'error', msg: `Canon de producto: ${rel} → "${m[0]}" (${what}; canon de career-ops; ver despachos de brand-ops y search-ops del 1-oct)`, skill: '/seo content' })
+    }
+    if (!zinkeeAllowed.has(rel) && /zinkee/i.test(text)) {
+      const at = text.search(/zinkee/i)
+      issues.push({ severity: 'error', msg: `Ex-empleador nombrado fuera de la experiencia: ${rel} → "…${text.slice(Math.max(0, at - 60), at + 20).replace(/\s+/g, ' ')}…" (decisión 29-sep: solo en la experiencia de home y /about)`, skill: '/seo content' })
+    }
     const hit = text.match(scaleWithDecimals)
     if (hit) {
       issues.push({ severity: 'error', msg: `Escala del Global con decimales: ${rel} → "${hit[0]}" (canon: la escala se nombra 1-5; un score concreto sí lleva decimal)`, skill: '/seo content' })

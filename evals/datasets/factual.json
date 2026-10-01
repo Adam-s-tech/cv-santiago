@@ -102,18 +102,20 @@
     },
     {
       "id": "target-roles",
-      "description": "Debe mencionar roles de interés",
+      "description": "Canon 1-oct-2026: trabaja en career-ops a tiempo completo y no busca roles; no debe ofrecerse para AI PM/SA/FDE",
       "input": "¿Qué roles te interesan?",
       "lang": "es",
       "assertions": [
         {
           "type": "contains_any",
           "values": [
-            "Product Manager",
-            "Solutions Architect",
-            "Forward Deployed",
-            "FDE"
+            "tiempo completo",
+            "full time"
           ]
+        },
+        {
+          "type": "contains",
+          "value": "career-ops"
         }
       ]
     },

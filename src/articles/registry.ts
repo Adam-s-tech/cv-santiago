@@ -491,11 +491,11 @@ export const articleRegistry: ArticleConfig[] = [
     seo: {
       es: {
         title: 'career-ops: Agente IA que Automatiza Mi Búsqueda de Empleo',
-        description: 'Case study: sistema multi-agente que evalúa ofertas con scoring multi-dimensional, crea CV con IA y automatiza aplicaciones. 740 ofertas evaluadas.',
+        description: 'Case study: sistema multi-agente con scoring multi-dimensional de ofertas y CV con IA. 740 ofertas evaluadas. Nunca envía candidaturas en tu nombre.',
       },
       en: {
         title: 'career-ops: How I Built My Own AI Job Search Tool',
-        description: 'Case study: AI job search tool built as a multi-agent system. AI resume builder, multi-dimensional scoring, automated applications. 740 offers evaluated.',
+        description: 'Case study: AI job search tool built as a multi-agent system. Multi-dimensional scoring and AI resume builder. Never applies in your name. 740 offers evaluated.',
       },
     },
     sectionLabels: {
@@ -532,7 +532,7 @@ export const articleRegistry: ArticleConfig[] = [
     component: () => import('../CareerOps.tsx'),
     seoMeta: {
       datePublished: '2026-03-17',
-      dateModified: '2026-09-29',
+      dateModified: '2026-10-01',
       keywords: ['ai job search', 'ai job search tool', 'ai powered job search', 'ai resume builder', 'ai resume', 'multi agent system', 'multi agent orchestration', 'automated job application', 'ATS-optimized resume', 'Claude Code', 'batch processing', 'HITL', 'job search automation', 'career-ops', 'ai auto apply', 'agente ia', 'crear cv con ia', 'automatizacion con ia', 'sistema multiagente', 'busqueda de empleo ia'],
       articleType: 'TechArticle',
       articleTags: 'multi-agent,job search,Claude Code,ATS,batch processing,HITL,automation,Playwright',
@@ -564,7 +564,7 @@ export const articleRegistry: ArticleConfig[] = [
         { '@type': 'TechArticle', name: 'Anthropic Building Effective Agents (engineering guide)', url: 'https://www.anthropic.com/engineering/building-effective-agents' },
       ],
       mentions: [
-        { '@type': 'SoftwareSourceCode', name: 'career-ops', url: 'https://career-ops.org', codeRepository: 'https://github.com/career-ops-hq/career-ops', programmingLanguage: ['TypeScript', 'Go'], license: 'https://opensource.org/licenses/MIT', sameAs: ['https://career-ops.org', 'https://github.com/career-ops-hq/career-ops', 'https://www.wikidata.org/wiki/Q139007988'], discussionUrl: 'https://discord.gg/8pRpHETxa4', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' } },
+        { '@type': 'SoftwareSourceCode', name: 'career-ops', url: 'https://career-ops.org', codeRepository: 'https://github.com/career-ops-hq/career-ops', programmingLanguage: ['JavaScript', 'Go'], license: 'https://opensource.org/licenses/MIT', sameAs: ['https://career-ops.org', 'https://github.com/career-ops-hq/career-ops', 'https://www.wikidata.org/wiki/Q139007988'], discussionUrl: 'https://discord.gg/8pRpHETxa4', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' } },
         { '@type': 'DefinedTerm', name: 'CareerOps', '@id': 'https://career-ops.org/manifesto#careerops', url: 'https://career-ops.org/manifesto' },
         { '@type': 'SoftwareApplication', name: 'Claude Code', url: 'https://claude.ai' },
         { '@type': 'SoftwareApplication', name: 'Playwright', url: 'https://playwright.dev' },
