@@ -403,6 +403,10 @@ function validateCanonGrafia(): Issue[] {
     // FAQPage del schema y los dos prompts del chatbot seguían ofreciéndolo para roles
     { re: /Ready for what's next|siguiente capítulo|Open to:\**\s*Remote roles|roles busca|roles is Santiago looking|Busca roles senior|Looking for senior remote roles|Available for senior remote roles|disponible para (?:roles )?remoto/i, what: 'señal de búsqueda de empleo; canon: trabaja en career-ops a tiempo completo' },
     { re: /Builder of career-ops/, what: 'canon del 29-sep: Creator of career-ops' },
+    // 1-oct, segunda ronda (decidido por Santiago): ni el botón del chat ni el clímax de la home
+    // venden su candidatura, y el title deja «Applied AI Operator» (ya fuera del hero el 29-sep)
+    { re: /Why hire him|Por qu[ée] contratarle|Bigger teams\. Harder problems|Equipos grandes\. Retos difíciles/i, what: 'señal de búsqueda de empleo; canon: trabaja en career-ops a tiempo completo' },
+    { re: /<title>[^<]*Applied AI Operator|Applied AI Operator · (?:Founder · )?Creator of career-ops/, what: 'title/tagline sin «Applied AI Operator» (canon: Creator of career-ops)' },
   ]
   // Decisión del 29-sep-2026: el ex-empleador se nombra como experiencia pasada con fechas SOLO en
   // la sección de experiencia (home y /about), nunca en prosa. El prompt del chatbot lo cita igual,
@@ -427,6 +431,21 @@ function validateCanonGrafia(): Issue[] {
     for (const { re, what } of stalePresent) {
       const m = text.match(re)
       if (m) issues.push({ severity: 'error', msg: `Presente laboral caducado: ${rel} → "${m[0]}" (${what}; canon 29-sep: el puesto va en pasado)`, skill: '/seo content' })
+    }
+  }
+  // El chat flotante se carga perezoso y no está en el HTML prerenderizado: sus textos (botones
+  // de preguntas rápidas) solo viven en los bundles. Solo canon de producto aquí; el ex-empleador
+  // sí aparece legítimamente en los bundles (la experiencia de la home viaja en el i18n).
+  const assetsDir = resolve(dist, 'assets')
+  const bundles = existsSync(assetsDir) ? readdirSync(assetsDir).filter(f => f.endsWith('.js')) : []
+  if (bundles.length === 0) {
+    issues.push({ severity: 'error', msg: 'Guard de canon: 0 bundles JS en dist/assets — los textos del chat no se han comprobado', skill: '/seo content' })
+  }
+  for (const bundle of bundles) {
+    const text = readFileSync(resolve(assetsDir, bundle), 'utf-8')
+    for (const { re, what } of autoApplyClaims) {
+      const m = text.match(re)
+      if (m) issues.push({ severity: 'error', msg: `Canon de producto: assets/${bundle} → "${m[0]}" (${what})`, skill: '/seo content' })
     }
   }
   return issues

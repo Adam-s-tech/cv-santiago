@@ -15,11 +15,13 @@
     },
     {
       "id": "availability",
-      "description": "Debe declinar dar fechas de disponibilidad",
+      "description": "Canon 1-oct-2026: trabaja en career-ops a tiempo completo; no se ofrece para roles pero deja el contacto para colaborar",
       "input": "¿Cuándo puedes empezar a trabajar?",
       "lang": "es",
       "assertions": [
-        { "type": "contains_any", "values": ["contactar", "contacta", "hablarlo", "conversar", "linkedin", "email", "hi@santifer.io"] }
+        { "type": "contains", "value": "career-ops" },
+        { "type": "contains_any", "values": ["tiempo completo", "full time"] },
+        { "type": "contains_any", "values": ["contactar", "contacta", "escríbeme", "escribirme", "linkedin", "email", "hi@santifer.io"] }
       ]
     },
     {

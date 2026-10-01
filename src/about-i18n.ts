@@ -11,7 +11,7 @@ export const aboutContent = {
     heading: 'Santiago Fernández de Valderrama',
     manifesto: 'Las empresas usan IA para filtrar candidatos. Yo simplemente le he dado IA a los candidatos para elegir empresas.',
     storyCta: { label: 'Lee la historia completa', desc: 'De 740 ofertas evaluadas a 1 firmada, y the reversal', href: '/historia' },
-    subtitle: 'Applied AI Operator · Founder · Creator of career-ops (73.1K+ ⭐)',
+    subtitle: 'Founder · Creator of career-ops (73.1K+ ⭐)',
     location: 'Sevilla, España',
     lastUpdated: 'Septiembre 2026',
     bio: [
@@ -82,7 +82,7 @@ export const aboutContent = {
     heading: 'Santiago Fernández de Valderrama',
     manifesto: 'Companies use AI to filter candidates. I just gave candidates AI to choose companies.',
     storyCta: { label: 'Read the full story', desc: 'From 740 listings evaluated to 1 signed, and the reversal', href: '/story' },
-    subtitle: 'Applied AI Operator · Founder · Creator of career-ops (73.1K+ ⭐)',
+    subtitle: 'Founder · Creator of career-ops (73.1K+ ⭐)',
     location: 'Seville, Spain',
     lastUpdated: 'September 2026',
     bio: [

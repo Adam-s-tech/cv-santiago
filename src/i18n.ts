@@ -1,13 +1,13 @@
 export const seo = {
   es: {
     title:
-      'santifer | Applied AI Operator · Creator of career-ops',
+      'santifer | Creator of career-ops · AI job search agent',
     description:
       'Multi-agent systems builder. Applied AI Operator con 2 case studies en producción. Creador de career-ops (73.1K+ ⭐). 16 años llevando IA a producción.',
   },
   en: {
     title:
-      'santifer | Applied AI Operator · Creator of career-ops',
+      'santifer | Creator of career-ops · AI job search agent',
     description:
       'Multi-agent systems builder. Applied AI Operator with 2 production case studies live. Creator of career-ops (73.1K+ ⭐). 16 years shipping AI at scale.',
   },
@@ -34,7 +34,7 @@ export const translations = {
       why: 'En Santifer iRepair automaticé todo lo que pude: desde un agente de IA que atendía el 90% de los clientes hasta un sistema operativo que orquestaba 12 bases de datos.',
       seeking: [
         'Siento que esto es sólo el principio.',
-        'Equipos grandes. Retos difíciles. End-to-end.',
+        'Open source. Construido en público. End-to-end.',
         'Ahora construyo career-ops a tiempo completo.',
       ],
       nav: [
@@ -846,8 +846,8 @@ export const translations = {
         },
         {
           icon: 'help',
-          label: '¿Por qué contratarle?',
-          query: '¿Por qué debería contratar a Santiago?',
+          label: '¿Qué es career-ops?',
+          query: '¿Qué es career-ops y cómo funciona?',
         },
         {
           icon: 'mail',
@@ -894,7 +894,7 @@ export const translations = {
       why: 'At Santifer iRepair I automated everything I could: from an AI agent that handled 90% of customers to an operating system orchestrating 12 databases.',
       seeking: [
         'This still feels like day one.',
-        'Bigger teams. Harder problems. End-to-end.',
+        'Open source. Built in public. End-to-end.',
         'Now building career-ops full time.',
       ],
       nav: [
@@ -1702,8 +1702,8 @@ export const translations = {
         },
         {
           icon: 'help',
-          label: 'Why hire him?',
-          query: 'Why should I hire Santiago?',
+          label: 'What is career-ops?',
+          query: 'What is career-ops and how does it work?',
         },
         {
           icon: 'mail',
