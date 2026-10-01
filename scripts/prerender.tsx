@@ -188,7 +188,7 @@ let enPage = indexHtml
 
 const aboutPersonProfile = {
   '@type': 'ProfilePage',
-  dateModified: '2026-04-28',
+  dateModified: '2026-10-01',
   mainEntity: {
     '@type': 'Person',
     '@id': 'https://santifer.io/#person',
@@ -197,7 +197,8 @@ const aboutPersonProfile = {
     url: 'https://santifer.io',
     image: 'https://santifer.io/foto-avatar.png',
     email: 'hi@santifer.io',
-    jobTitle: ['Multi-Agent Systems Builder', 'Applied AI Operator', 'Head of Applied AI', 'AI Product Manager', 'Solutions Architect (No/Low-Code & AI)', 'AI Forward Deployed Engineer'],
+    // Misma cadena que el Person de la home y de los artículos, GitHub, Wikidata y career-ops.org (canon 29-sep)
+    jobTitle: 'Creator of career-ops',
     knowsAbout: [
       { '@type': 'Thing', name: 'Artificial Intelligence', url: 'https://en.wikipedia.org/wiki/Artificial_intelligence' },
       { '@type': 'Thing', name: 'Machine Learning', url: 'https://en.wikipedia.org/wiki/Machine_learning' },
@@ -245,7 +246,6 @@ const aboutPersonProfile = {
       'https://www.crunchbase.com/person/santiago-fernandez-de-valderrama',
       'https://huggingface.co/santifer',
       'https://www.wikidata.org/wiki/Q138710224',
-      'https://santiferirepair.es',
       'https://career-ops.org/about',
       'https://www.facebook.com/santifer.io/',
       'https://www.producthunt.com/@santifer',

@@ -49,7 +49,7 @@ Notable quotes from Create OS Lounge interview:
 
 ## Professional Summary
 
-Applied AI Operator with 16+ years shipping to production. After scaling and selling my phone repair business (going-concern sale, 2025) with 90% AI self-service, I now ship AI systems at scale for B2B SaaS. Turn ambiguous business goals into production-ready AI.
+Creator of career-ops, the open-source AI job search agent. Spanish tech entrepreneur with 16+ years building products: I founded Santifer iRepair in 2009 and sold it as a going concern in 2025, with 90% AI self-service. career-ops landed me a Head of Applied AI role. Six months later I left that role to focus on building career-ops full time.
 
 I operate with end-to-end ownership across discovery → prioritization → delivery → adoption, collaborating closely with stakeholders and engineering.
 

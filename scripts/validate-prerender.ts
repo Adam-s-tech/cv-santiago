@@ -386,6 +386,7 @@ function validateCanonGrafia(): Issue[] {
     { re: /I am now Head of Applied AI|my current role as Head of Applied AI|role I hold today/i, what: 'Head of Applied AI en presente' },
     { re: /ahora soy Head of Applied AI|mi rol actual como Head of Applied AI/i, what: 'Head of Applied AI en presente' },
     { re: /"worksFor"\s*:\s*\{[^}]*Zinkee/, what: 'worksFor declara el empleo anterior como actual' },
+    { re: /I now ship AI systems|ahora (?:llevo|construyo) sistemas de IA (?:a escala )?para SaaS/i, what: 'el puesto anterior en presente (sobrevivió en la bio de llms.txt hasta el 1-oct)' },
   ]
   // Canon de producto (1-oct-2026, aviso de brand-ops el día del anuncio full time): career-ops
   // prepara candidaturas y nunca las envía en nombre del candidato. llms.txt decía «automates the
@@ -412,6 +413,9 @@ function validateCanonGrafia(): Issue[] {
     // afirmaba usuarios sin fuente (no hay telemetría)
     { re: /<meta (?:name="description"|property="og:description"|name="twitter:description") content="[^"]*Applied AI Operator/, what: 'descripción de la home sin «Applied AI Operator»' },
     { re: /16 (?:years shipping AI|años llevando IA)|used by thousands/i, what: 'afirmación sin respaldo (16 años de negocio, no de IA; sin telemetría de usuarios)' },
+    // Retirado del todo el 1-oct (Santiago, para santifer.io y career-ops.org): el último refugio era
+    // la bio de llms.txt y dos claves de i18n que ningún componente usaba
+    { re: /Applied AI Operator/, what: 'descriptor retirado; canon: Creator of career-ops' },
   ]
   // Decisión del 29-sep-2026: el ex-empleador se nombra como experiencia pasada con fechas SOLO en
   // la sección de experiencia (home y /about), nunca en prosa. El prompt del chatbot lo cita igual,
@@ -570,6 +574,59 @@ function validateHydrationSafety(): Issue[] {
     if (stale.length > 0) {
       issues.push({ severity: 'error', msg: `Fuente modificada después de vite build: ${stale.slice(0, 5).join(', ')}${stale.length > 5 ? '…' : ''}. El prerender la ve y el cliente no → hidratación rota. Todo lo que reescribe src/ va antes de vite build.`, skill: '/seo technical' })
     }
+  }
+  return issues
+}
+
+/**
+ * Guard de entidad (1-oct-2026). El mismo Person (@id https://santifer.io/#person) se declaraba
+ * distinto según la página: «Creator of career-ops» en home y artículos, pero en /about (la Entity
+ * Home) un jobTitle con seis títulos de candidato y un sameAs con santiferirepair.es, que la
+ * decisión del 29-sep ya había retirado. Un nodo con @id es una sola entidad: si dos páginas lo
+ * declaran con propiedades distintas, el grafo recibe dos verdades.
+ */
+function validatePersonEntity(): Issue[] {
+  const issues: Issue[] = []
+  const PERSON_ID = 'https://santifer.io/#person'
+  const CANON_JOB_TITLE = 'Creator of career-ops'
+  const pages: string[] = []
+  const walk = (dir: string) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = resolve(dir, entry.name)
+      if (entry.isDirectory()) walk(full)
+      else if (entry.name === 'index.html') pages.push(full)
+    }
+  }
+  try { walk(dist) } catch { /* dist ausente: el assert de abajo lo convierte en error */ }
+
+  let reference: { page: string; sameAs: string } | null = null
+  let declarations = 0
+  const visit = (node: unknown, page: string) => {
+    if (Array.isArray(node)) { node.forEach(n => visit(n, page)); return }
+    if (!node || typeof node !== 'object') return
+    const obj = node as Record<string, unknown>
+    // Una declaración (no una simple referencia {"@id"}) lleva jobTitle o sameAs
+    if (obj['@id'] === PERSON_ID && ('jobTitle' in obj || 'sameAs' in obj)) {
+      declarations++
+      if (obj.jobTitle !== CANON_JOB_TITLE) {
+        issues.push({ severity: 'error', msg: `Person ${PERSON_ID} en ${page}: jobTitle ${JSON.stringify(obj.jobTitle)} (canon: "${CANON_JOB_TITLE}")`, skill: '/seo schema' })
+      }
+      const sameAs = JSON.stringify([...((obj.sameAs as string[]) ?? [])].sort())
+      if (!reference) reference = { page, sameAs }
+      else if (sameAs !== reference.sameAs) {
+        issues.push({ severity: 'error', msg: `Person ${PERSON_ID}: el sameAs de ${page} no coincide con el de ${reference.page}`, skill: '/seo schema' })
+      }
+    }
+    Object.values(obj).forEach(v => visit(v, page))
+  }
+  for (const file of pages) {
+    const page = file.replace(dist + '/', '')
+    for (const m of readFileSync(file, 'utf-8').matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      try { visit(JSON.parse(m[1]), page) } catch { /* JSON-LD inválido: lo cubren otros checks */ }
+    }
+  }
+  if (declarations === 0) {
+    issues.push({ severity: 'error', msg: `Guard de entidad: 0 declaraciones del Person ${PERSON_ID} en dist — el guard no ha comprobado nada`, skill: '/seo schema' })
   }
   return issues
 }
@@ -928,7 +985,7 @@ if (structuralIssues.length > 0) {
 }
 
 // Global checks
-const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims(), ...validateCanonGrafia(), ...validateShareCards(), ...validateHydrationSafety()]
+const globalIssues = [...validateGlobalFiles(), ...validateAssetClaims(), ...validateCanonGrafia(), ...validateShareCards(), ...validateHydrationSafety(), ...validatePersonEntity()]
 if (globalIssues.length > 0) {
   printIssues(globalIssues, 'Global files')
 } else {
