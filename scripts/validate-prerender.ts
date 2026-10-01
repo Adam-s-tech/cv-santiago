@@ -416,6 +416,9 @@ function validateCanonGrafia(): Issue[] {
     // Retirado del todo el 1-oct (Santiago, para santifer.io y career-ops.org): el último refugio era
     // la bio de llms.txt y dos claves de i18n que ningún componente usaba
     { re: /Applied AI Operator/, what: 'descriptor retirado; canon: Creator of career-ops' },
+    // La cobertura es de WIRED Greece (wired.com.gr); venture-ops, 1-oct: nunca «WIRED» a secas,
+    // tampoco en alt ni aria-label (las máquinas los leen)
+    { re: /\bWIRED\b(?! Greece| Grecia| \(Grecia\))/, what: 'WIRED a secas; canon: WIRED Greece' },
   ]
   // Decisión del 29-sep-2026: el ex-empleador se nombra como experiencia pasada con fechas SOLO en
   // la sección de experiencia (home y /about), nunca en prosa. El prompt del chatbot lo cita igual,
@@ -600,6 +603,7 @@ function validatePersonEntity(): Issue[] {
   try { walk(dist) } catch { /* dist ausente: el assert de abajo lo convierte en error */ }
 
   let reference: { page: string; sameAs: string } | null = null
+  let personDescription: { page: string; text: string } | null = null
   let declarations = 0
   const visit = (node: unknown, page: string) => {
     if (Array.isArray(node)) { node.forEach(n => visit(n, page)); return }
@@ -610,6 +614,21 @@ function validatePersonEntity(): Issue[] {
       declarations++
       if (obj.jobTitle !== CANON_JOB_TITLE) {
         issues.push({ severity: 'error', msg: `Person ${PERSON_ID} en ${page}: jobTitle ${JSON.stringify(obj.jobTitle)} (canon: "${CANON_JOB_TITLE}")`, skill: '/seo schema' })
+      }
+      // D-004 de search-ops (1-oct): founder es propiedad de Organization; la relación vive en el
+      // nodo santiferirepair.es/#org (founder → #person), no en el Person
+      if ('founder' in obj) {
+        issues.push({ severity: 'error', msg: `Person ${PERSON_ID} en ${page}: declara founder (es propiedad de Organization; va en el nodo de la organización)`, skill: '/seo schema' })
+      }
+      // El nombre completo con Aparicio también en la description (canon de nombre del 13-jul)
+      if (typeof obj.description === 'string') {
+        if (!obj.description.includes('Aparicio')) {
+          issues.push({ severity: 'error', msg: `Person ${PERSON_ID} en ${page}: la description no lleva el nombre completo (Aparicio)`, skill: '/seo schema' })
+        }
+        if (!personDescription) personDescription = { page, text: obj.description }
+        else if (obj.description !== personDescription.text) {
+          issues.push({ severity: 'error', msg: `Person ${PERSON_ID}: la description de ${page} no coincide con la de ${personDescription.page}`, skill: '/seo schema' })
+        }
       }
       const sameAs = JSON.stringify([...((obj.sameAs as string[]) ?? [])].sort())
       if (!reference) reference = { page, sameAs }

@@ -70,7 +70,7 @@ const PERSON = {
   name: 'Santiago Fernández de Valderrama Aparicio',
   alternateName: ['Santiago Fernández de Valderrama', 'santifer', 'Santi'],
   url: 'https://santifer.io',
-  description: "Santiago Fernández de Valderrama is a software engineer specializing in multi-agent AI systems and agentic adoption. He created career-ops, an open-source project maintained by an orchestrated fleet of AI agents, and coined 'agentic maintenance': gated, evidence-based upkeep of a living codebase, sustained by a fleet of AI agents under human direction.",
+  description: "Santiago Fernández de Valderrama Aparicio is a software engineer specializing in multi-agent AI systems and agentic adoption. He created career-ops, an open-source project maintained by an orchestrated fleet of AI agents, and coined 'agentic maintenance': gated, evidence-based upkeep of a living codebase, sustained by a fleet of AI agents under human direction.",
   jobTitle: 'Creator of career-ops',
   sameAs: [
     'https://www.linkedin.com/in/santifer',

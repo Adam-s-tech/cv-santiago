@@ -36,10 +36,10 @@ export function PressFeatures({ lang, variant = 'hero', className = '' }: PressF
             href="https://wired.com.gr/article/to-ai-ergaleio-pou-fernei-epanastasi-ston-tropo-pou-psachnoume-douleia/"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            aria-label="WIRED — Featured article on career-ops"
+            aria-label="WIRED Greece: featured article on career-ops"
             className={link}
           >
-            <img src="/press-logos/wired.svg" alt="WIRED" width={110} height={22} className="press-logo h-[22px] w-auto" />
+            <img src="/press-logos/wired.svg" alt="WIRED Greece" width={110} height={22} className="press-logo h-[22px] w-auto" />
           </a>
           <a
             href="https://www.businessinsider.com/how-i-built-tool-filter-job-listings-landed-head-ai-2026-4"

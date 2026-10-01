@@ -227,12 +227,6 @@ const aboutPersonProfile = {
       { '@type': 'EducationalOrganization', name: 'BIGSEO - Master en Inteligencia Artificial' },
       { '@type': 'EducationalOrganization', name: 'ETSI - Universidad de Sevilla' },
     ],
-    founder: {
-      '@type': 'Organization',
-      name: 'Santifer iRepair',
-      url: 'https://santiferirepair.es',
-      foundingDate: '2009',
-    },
     sameAs: [
       'https://www.linkedin.com/in/santifer',
       'https://github.com/santifer',
