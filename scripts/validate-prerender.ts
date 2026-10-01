@@ -407,6 +407,11 @@ function validateCanonGrafia(): Issue[] {
     // venden su candidatura, y el title deja «Applied AI Operator» (ya fuera del hero el 29-sep)
     { re: /Why hire him|Por qu[ée] contratarle|Bigger teams\. Harder problems|Equipos grandes\. Retos difíciles/i, what: 'señal de búsqueda de empleo; canon: trabaja en career-ops a tiempo completo' },
     { re: /<title>[^<]*Applied AI Operator|Applied AI Operator · (?:Founder · )?Creator of career-ops/, what: 'title/tagline sin «Applied AI Operator» (canon: Creator of career-ops)' },
+    // Descripción de la home (1-oct, aviso de search-ops): contaba otra historia bajo el title nuevo,
+    // y «16 años llevando IA» es falso (los 16 años son de operar un negocio). «used by thousands»
+    // afirmaba usuarios sin fuente (no hay telemetría)
+    { re: /<meta (?:name="description"|property="og:description"|name="twitter:description") content="[^"]*Applied AI Operator/, what: 'descripción de la home sin «Applied AI Operator»' },
+    { re: /16 (?:years shipping AI|años llevando IA)|used by thousands/i, what: 'afirmación sin respaldo (16 años de negocio, no de IA; sin telemetría de usuarios)' },
   ]
   // Decisión del 29-sep-2026: el ex-empleador se nombra como experiencia pasada con fechas SOLO en
   // la sección de experiencia (home y /about), nunca en prosa. El prompt del chatbot lo cita igual,

@@ -3,13 +3,13 @@ export const seo = {
     title:
       'santifer | Creator of career-ops · AI job search agent',
     description:
-      'Multi-agent systems builder. Applied AI Operator con 2 case studies en producción. Creador de career-ops (73.1K+ ⭐). 16 años llevando IA a producción.',
+      'Construyo agentes de IA que hacen el trabajo. Creador de career-ops (73.1K+ ⭐), agente open source para buscar empleo. Gratis para los candidatos, para siempre.',
   },
   en: {
     title:
       'santifer | Creator of career-ops · AI job search agent',
     description:
-      'Multi-agent systems builder. Applied AI Operator with 2 production case studies live. Creator of career-ops (73.1K+ ⭐). 16 years shipping AI at scale.',
+      'I build AI agents that do the work. Creator of career-ops (73.1K+ ⭐), the open-source AI job search agent. Free for candidates, forever. Your call. Always.',
   },
 };
 
